@@ -1,7 +1,9 @@
 import 'package:be_well/auth/view/login.dart';
 import 'package:be_well/auth/view/signup.dart';
+import 'package:be_well/auth/view/signup_continued.dart';
 import 'package:be_well/home/view/login_or_signup.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_navigation/src/root/get_material_app.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,11 +15,11 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const LoginOrSignup(),
+      home: const Signup(),
     );
   }
 }

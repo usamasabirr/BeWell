@@ -1,6 +1,11 @@
+import 'package:be_well/auth/controller/auth_controller.dart';
+import 'package:be_well/auth/view/signup_continued.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:intl/intl.dart';
 
 class Signup extends StatefulWidget {
   const Signup({super.key});
@@ -11,6 +16,7 @@ class Signup extends StatefulWidget {
 
 class _SignupState extends State<Signup> {
   final _formKey = GlobalKey<FormState>();
+  AuthController authController = Get.put(AuthController());
 
   @override
   Widget build(BuildContext context) {
@@ -139,6 +145,34 @@ class _SignupState extends State<Signup> {
                                 ),
                                 //date of birth
                                 TextFormField(
+                                  controller: authController.dateController,
+                                  onTap: () async {
+                                    DateTime? pickedDate = await showDatePicker(
+                                        context: context,
+                                        initialDate:
+                                            DateTime.now(), //get today's date
+                                        firstDate: DateTime(
+                                            1900), //DateTime.now() - not to allow to choose before today.
+                                        lastDate: DateTime(2101));
+                                    if (pickedDate != null) {
+                                      print(
+                                          pickedDate); //get the picked date in the format => 2022-07-04 00:00:00.000
+                                      String formattedDate =
+                                          DateFormat('dd-MM-yyyy').format(
+                                              pickedDate); // format date in required form here we use yyyy-MM-dd that means time is removed
+                                      print(
+                                          formattedDate); //formatted date output using intl package =>  2022-07-04
+                                      //You can format date as per your need
+
+                                      setState(() {
+                                        authController.dateController.text =
+                                            formattedDate; //set foratted date to TextField value.
+                                      });
+                                    } else {
+                                      print("Date is not selected");
+                                    }
+                                  },
+                                  readOnly: true,
                                   decoration: InputDecoration(
                                       border: OutlineInputBorder(
                                           borderRadius:
@@ -146,6 +180,7 @@ class _SignupState extends State<Signup> {
                                       label: Text('Date of birth'),
                                       hintText: "Enter dob"),
                                 ),
+
                                 //Forgot your password
                               ],
                             ),
@@ -163,7 +198,9 @@ class _SignupState extends State<Signup> {
                         style: ElevatedButton.styleFrom(
                             shape: StadiumBorder(),
                             backgroundColor: Color(0xff7FD958)),
-                        onPressed: () {},
+                        onPressed: () {
+                          Get.to(SignupContinued());
+                        },
                         child: Text("Next")),
                   ),
                 ]),
