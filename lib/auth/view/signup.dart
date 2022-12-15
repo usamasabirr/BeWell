@@ -83,6 +83,9 @@ class _SignupState extends State<Signup> {
                           child: SingleChildScrollView(
                             child: Column(
                               children: [
+                                SizedBox(
+                                  height: 10,
+                                ),
                                 //name
                                 TextFormField(
                                   decoration: InputDecoration(
@@ -91,6 +94,13 @@ class _SignupState extends State<Signup> {
                                               BorderRadius.circular(10)),
                                       label: Text('Name'),
                                       hintText: "Enter name"),
+                                  controller: authController.nameController,
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return '* Please enter name';
+                                    }
+                                    return null;
+                                  },
                                 ),
                                 SizedBox(
                                   height: mediaHeight * 0.01,
@@ -103,6 +113,13 @@ class _SignupState extends State<Signup> {
                                               BorderRadius.circular(10)),
                                       label: Text('Email'),
                                       hintText: "Enter email"),
+                                  controller: authController.emailController,
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return '* Please enter email';
+                                    }
+                                    return null;
+                                  },
                                 ),
                                 SizedBox(
                                   height: mediaHeight * 0.01,
@@ -115,6 +132,13 @@ class _SignupState extends State<Signup> {
                                               BorderRadius.circular(10)),
                                       label: Text('Username'),
                                       hintText: "Enter username"),
+                                  controller: authController.usernameController,
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return '* Please enter username';
+                                    }
+                                    return null;
+                                  },
                                 ),
                                 SizedBox(
                                   height: mediaHeight * 0.01,
@@ -127,6 +151,13 @@ class _SignupState extends State<Signup> {
                                               BorderRadius.circular(10)),
                                       label: Text('password'),
                                       hintText: "Enter password"),
+                                  controller: authController.passwordController,
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return '* Please enter password';
+                                    }
+                                    return null;
+                                  },
                                 ),
                                 SizedBox(
                                   height: mediaHeight * 0.01,
@@ -139,12 +170,30 @@ class _SignupState extends State<Signup> {
                                               BorderRadius.circular(10)),
                                       label: Text('Confirm password'),
                                       hintText: "Enter password again"),
+                                  controller:
+                                      authController.confirmPasswordController,
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return '* Please confirm password';
+                                    } else if (value !=
+                                        authController
+                                            .passwordController.text) {
+                                      return 'Password mismatch';
+                                    }
+                                    return null;
+                                  },
                                 ),
                                 SizedBox(
                                   height: mediaHeight * 0.01,
                                 ),
                                 //date of birth
                                 TextFormField(
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return '* Please select date of birth';
+                                    }
+                                    return null;
+                                  },
                                   controller: authController.dateController,
                                   onTap: () async {
                                     DateTime? pickedDate = await showDatePicker(
@@ -199,7 +248,9 @@ class _SignupState extends State<Signup> {
                             shape: StadiumBorder(),
                             backgroundColor: Color(0xff7FD958)),
                         onPressed: () {
+                          //if (_formKey.currentState!.validate()) {
                           Get.to(SignupContinued());
+                          //}
                         },
                         child: Text("Next")),
                   ),

@@ -105,12 +105,27 @@ class _SignupContinuedState extends State<SignupContinued> {
                             "O+",
                             "O-"
                           ],
+                          onChanged: (dynamic item) {
+                            //print('item is $item');
+                            authController.bloodType = item.toString();
+                          },
                           decoration: InputDecoration(
-                              border: OutlineInputBorder(),
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10)),
                               suffixIcon: Icon(Icons.arrow_drop_down),
                               labelText: "Blood Type"),
                           dropdownHeight: 180,
                         ),
+                        Obx((() => authController.bloodTypeError.value == true
+                            ? Container(
+                                alignment: Alignment.topLeft,
+                                margin: EdgeInsets.only(top: 5, left: 5),
+                                child: Text(
+                                  "* Please select blood type",
+                                  style: TextStyle(color: Colors.red),
+                                ))
+                            : SizedBox())),
+
                         SizedBox(
                           height: 10,
                         ),
@@ -156,6 +171,10 @@ class _SignupContinuedState extends State<SignupContinued> {
                         ),
                         TextDropdownFormField(
                           options: ["Male", "Female"],
+                          onChanged: (dynamic item) {
+                            print('item is $item');
+                            authController.genderType = item.toString();
+                          },
                           decoration: InputDecoration(
                               border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(10)),
@@ -163,6 +182,15 @@ class _SignupContinuedState extends State<SignupContinued> {
                               labelText: "Gender"),
                           dropdownHeight: 180,
                         ),
+                        Obx((() => authController.genderTypeError.value == true
+                            ? Container(
+                                alignment: Alignment.topLeft,
+                                margin: EdgeInsets.only(top: 5, left: 5),
+                                child: Text(
+                                  "* Please select gender",
+                                  style: TextStyle(color: Colors.red),
+                                ))
+                            : SizedBox())),
                         SizedBox(
                           height: 10,
                         ),
@@ -233,7 +261,18 @@ class _SignupContinuedState extends State<SignupContinued> {
                     style: ElevatedButton.styleFrom(
                         shape: StadiumBorder(),
                         backgroundColor: Color(0xff7FD958)),
-                    onPressed: () {},
+                    onPressed: () {
+                      if (authController.bloodType == '') {
+                        authController.bloodTypeError.value = true;
+                      } else {
+                        authController.bloodTypeError.value = false;
+                      }
+                      if (authController.genderType == '') {
+                        authController.genderTypeError.value = true;
+                      } else {
+                        authController.genderTypeError.value = false;
+                      }
+                    },
                     child: Text("SIGN UP")),
               ),
             ],
