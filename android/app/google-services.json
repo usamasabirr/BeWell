@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "494990120827",
+    "project_id": "bewell-ecf2e",
+    "storage_bucket": "bewell-ecf2e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:494990120827:android:ad3576d66e1caf17164fde",
+        "android_client_info": {
+          "package_name": "com.example.be_well"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "494990120827-4rofkag069tljlhsd7o6q5b2eved94b1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCORTUE_8n9_Gzxm4YolyYWYTlaKEFPiFY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "494990120827-4rofkag069tljlhsd7o6q5b2eved94b1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

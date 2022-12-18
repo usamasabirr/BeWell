@@ -6,6 +6,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:intl/intl.dart';
+import 'package:qr_flutter/qr_flutter.dart';
 
 class Signup extends StatefulWidget {
   const Signup({super.key});
@@ -239,6 +240,7 @@ class _SignupState extends State<Signup> {
                   SizedBox(
                     height: mediaHeight * 0.02,
                   ),
+
                   //Next
                   SizedBox(
                     height: mediaHeight * 0.06,
@@ -248,9 +250,9 @@ class _SignupState extends State<Signup> {
                             shape: StadiumBorder(),
                             backgroundColor: Color(0xff7FD958)),
                         onPressed: () {
-                          //if (_formKey.currentState!.validate()) {
-                          Get.to(SignupContinued());
-                          //}
+                          if (_formKey.currentState!.validate()) {
+                            Get.to(SignupContinued());
+                          }
                         },
                         child: Text("Next")),
                   ),

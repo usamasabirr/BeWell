@@ -1,7 +1,9 @@
 import 'package:be_well/auth/view/login.dart';
+import 'package:be_well/auth/view/signup.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:get/get.dart';
 
 class LoginOrSignup extends StatefulWidget {
   const LoginOrSignup({super.key});
@@ -78,9 +80,8 @@ class _LoginOrSignupState extends State<LoginOrSignup> {
                             shape: StadiumBorder(),
                             backgroundColor: Color(0xff7FD958)),
                         onPressed: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => Login(),
-                          ));
+                          Get.to(Login());
+                          ;
                         },
                         child: Text("LOGIN")),
                   ),
@@ -94,7 +95,9 @@ class _LoginOrSignupState extends State<LoginOrSignup> {
                         style: ElevatedButton.styleFrom(
                             shape: StadiumBorder(),
                             backgroundColor: Color(0xff7FD958)),
-                        onPressed: () {},
+                        onPressed: () {
+                          Get.to(Signup());
+                        },
                         child: Text("SIGNUP")),
                   ),
                 ]),

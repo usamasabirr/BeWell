@@ -1,9 +1,12 @@
 import 'package:be_well/auth/controller/auth_controller.dart';
+import 'package:be_well/auth/view/login_or_signup.dart';
 import 'package:dropdown_plus/dropdown_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
+import 'package:qr_flutter/qr_flutter.dart';
+import 'package:widgets_to_image/widgets_to_image.dart';
 
 class SignupContinued extends StatefulWidget {
   const SignupContinued({super.key});
@@ -14,6 +17,7 @@ class SignupContinued extends StatefulWidget {
 
 class _SignupContinuedState extends State<SignupContinued> {
   AuthController authController = Get.find();
+
   @override
   Widget build(BuildContext context) {
     var mediaHeight = MediaQuery.of(context).size.height;
@@ -63,34 +67,6 @@ class _SignupContinuedState extends State<SignupContinued> {
                   child: SingleChildScrollView(
                     child: Column(
                       children: [
-                        // Container(
-                        //   width: mediaWidth,
-                        //   child: DropdownButton<String>(
-                        //     value: authController.bloodType,
-                        //     icon: const SizedBox(),
-                        //     // icon: Align(
-                        //     //   alignment:Alignment.topLeft,
-                        //     //   child: const Icon(Icons.arrow_downward)),
-                        //     elevation: 16,
-                        //     style: TextStyle(color: Colors.grey[600]),
-                        //     underline: Container(
-                        //       height: 1,
-                        //       color: Colors.grey,
-                        //     ),
-                        //     onChanged: (String? newValue) {
-                        //       setState(() {
-                        //         authController.bloodType = newValue!;
-                        //       });
-                        //     },
-                        //     items: authController.bloodTypeDropDownValues
-                        //         .map<DropdownMenuItem<String>>((String value) {
-                        //       return DropdownMenuItem<String>(
-                        //         value: value,
-                        //         child: Text(value),
-                        //       );
-                        //     }).toList(),
-                        //   ),
-                        // ),
                         SizedBox(
                           height: 10,
                         ),
@@ -125,7 +101,6 @@ class _SignupContinuedState extends State<SignupContinued> {
                                   style: TextStyle(color: Colors.red),
                                 ))
                             : SizedBox())),
-
                         SizedBox(
                           height: 10,
                         ),
@@ -261,7 +236,7 @@ class _SignupContinuedState extends State<SignupContinued> {
                     style: ElevatedButton.styleFrom(
                         shape: StadiumBorder(),
                         backgroundColor: Color(0xff7FD958)),
-                    onPressed: () {
+                    onPressed: () async {
                       if (authController.bloodType == '') {
                         authController.bloodTypeError.value = true;
                       } else {
@@ -272,6 +247,12 @@ class _SignupContinuedState extends State<SignupContinued> {
                       } else {
                         authController.genderTypeError.value = false;
                       }
+                      //authController.registerWithEmailAndPassword();
+                      // qrCodeDialogBox();
+                      // authController.bytes =
+                      //     await authController.controller.capture();
+                      // print(authController.bytes);
+                      // Get.offAll(LoginOrSignup());
                     },
                     child: Text("SIGN UP")),
               ),
@@ -280,5 +261,62 @@ class _SignupContinuedState extends State<SignupContinued> {
         ),
       )),
     );
+  }
+
+  void qrCodeDialogBox() {
+    // Get.defaultDialog(
+    //     title: "Qr Code",
+    //     content: FittedBox(
+    //       child: WidgetsToImage(
+    //         controller: authController.controller,
+    //         child: Container(
+    //           height: 200,
+    //           width: 200,
+    //           child: QrImage(
+    //             data: "1234567890",
+    //             version: QrVersions.auto,
+    //             size: 200.0,
+    //           ),
+    //         ),
+    //       ),
+    //     ));
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return Dialog(
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20.0)), //this right here
+            child: Container(
+              height: 400,
+              child: Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    WidgetsToImage(
+                      controller: authController.controller,
+                      child: QrImage(
+                        data: "1234567890",
+                        version: QrVersions.auto,
+                        size: 200.0,
+                      ),
+                    ),
+                    SizedBox(
+                      width: 320.0,
+                      child: ElevatedButton(
+                        onPressed: () {},
+                        child: Text(
+                          "Save",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            ),
+          );
+        });
   }
 }
