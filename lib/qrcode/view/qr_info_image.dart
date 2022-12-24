@@ -1,4 +1,3 @@
-import 'package:be_well/account/view/edit_account.dart';
 import 'package:be_well/qrcode/controller/qrcode_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
@@ -7,14 +6,16 @@ import 'package:get/get.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:widgets_to_image/widgets_to_image.dart';
 
-class Account extends StatefulWidget {
-  const Account({super.key});
+class QrInfoImage extends StatefulWidget {
+  const QrInfoImage({super.key});
 
   @override
-  State<Account> createState() => _AccountState();
+  State<QrInfoImage> createState() => _QrInfoImageState();
 }
 
-class _AccountState extends State<Account> {
+class _QrInfoImageState extends State<QrInfoImage> {
+  QrCodeController qrCodeController = Get.find();
+
   @override
   Widget build(BuildContext context) {
     var mediaHeight = MediaQuery.of(context).size.height;
@@ -44,68 +45,54 @@ class _AccountState extends State<Account> {
                   },
                   child: Icon(
                     Icons.arrow_back,
-                    size: mediaHeight * 0.04,
-                  ),
-                ),
-                Opacity(
-                  opacity: 0.0,
-                  child: Image.asset(
-                    'assets/images/edit_button.png',
-                    height: mediaWidth * 0.06,
                   ),
                 ),
                 Expanded(
                   child: SizedBox(),
                 ),
-                Image.asset(
-                  'assets/images/logo_only.png',
-                  height: 60,
+                Text(
+                  "QR Code",
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 32,
+                      fontWeight: FontWeight.bold),
                 ),
                 Expanded(
                   child: SizedBox(),
-                ),
-                InkWell(
-                  onTap: () {
-                    Get.to(EditAccount());
-                  },
-                  child: Image.asset(
-                    'assets/images/edit_button.png',
-                    height: mediaWidth * 0.06,
-                  ),
                 ),
                 SizedBox(
-                  width: 10 + mediaHeight * 0.04,
+                  width: 15,
                 ),
               ]),
             ),
-            // SizedBox(
-            //   height: 20,
-            // ),
-            Stack(
-              children: [
-                Container(
-                  //color: Colors.red,
-                  height: mediaHeight * 0.7,
-                  width: mediaWidth,
-                ),
-                Positioned(
-                  left: 20,
-                  right: 20,
-                  top: mediaHeight * 0.06,
-                  child: Container(
-                      height: mediaHeight * 0.6,
-                      width: mediaWidth,
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(10)),
-                      child: Container(
-                        //color: Colors.orange,
-                        margin: EdgeInsets.only(
-                            top: mediaHeight * 0.12 - mediaHeight * 0.06,
-                            left: 20),
-                        child: SingleChildScrollView(
-                          child: Container(
-                            margin: EdgeInsets.symmetric(vertical: 10),
+            SizedBox(
+              height: 20,
+            ),
+            WidgetsToImage(
+              controller: qrCodeController.infoToImageController,
+              child: Stack(
+                children: [
+                  Container(
+                    //color: Colors.red,
+                    height: mediaHeight * 0.8,
+                    width: mediaWidth,
+                  ),
+                  Positioned(
+                    left: 20,
+                    right: 20,
+                    top: mediaHeight * 0.06,
+                    child: Container(
+                        height: mediaHeight * 0.7,
+                        width: mediaWidth,
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(10)),
+                        child: Container(
+                          //color: Colors.orange,
+                          margin: EdgeInsets.only(
+                              top: mediaHeight * 0.12 - mediaHeight * 0.06,
+                              left: 20),
+                          child: SingleChildScrollView(
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -307,65 +294,36 @@ class _AccountState extends State<Account> {
                               ],
                             ),
                           ),
-                        ),
-                      )),
-                ),
-                Positioned(
-                  left: (mediaWidth / 2) - ((mediaHeight * 0.12) / 2),
-                  child: Container(
-                    height: mediaHeight * 0.12,
-                    width: mediaHeight * 0.12,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(50),
-                        color: Colors.green,
-                        image: DecorationImage(
-                            fit: BoxFit.fill,
-                            image:
-                                AssetImage('assets/images/female_vector.png'))),
+                        )),
                   ),
-                ),
-              ],
+                  Positioned(
+                    left: (mediaWidth / 2) - ((mediaHeight * 0.12) / 2),
+                    child: Container(
+                      height: mediaHeight * 0.12,
+                      width: mediaHeight * 0.12,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(50),
+                          color: Colors.green,
+                          image: DecorationImage(
+                              fit: BoxFit.fill,
+                              image: AssetImage(
+                                  'assets/images/female_vector.png'))),
+                    ),
+                  ),
+                ],
+              ),
             ),
-            // SizedBox(
-            //   height: mediaHeight * 0.06,
-            //   width: mediaWidth * 0.67,
-            //   child: ElevatedButton(
-            //       style: ElevatedButton.styleFrom(
-            //           shape: StadiumBorder(),
-            //           backgroundColor: Color(0xff7FD958)),
-            //       onPressed: () {
-            //         //qrCodeController.generateQrCode();
-            //       },
-            //       child: Text("Finish")),
-            // )
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                SizedBox(
-                  height: mediaHeight * 0.05,
-                  width: mediaWidth / 3,
-                  child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          shape: StadiumBorder(),
-                          backgroundColor: Color(0xff7FD958)),
-                      onPressed: () {
-                        //qrCodeController.generateQrCode();
-                      },
-                      child: Text("Delete Acount")),
-                ),
-                SizedBox(
-                  height: mediaHeight * 0.05,
-                  width: mediaWidth / 3,
-                  child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          shape: StadiumBorder(),
-                          backgroundColor: Color(0xff7FD958)),
-                      onPressed: () {
-                        //qrCodeController.generateQrCode();
-                      },
-                      child: Text("Log out")),
-                ),
-              ],
+            SizedBox(
+              height: mediaHeight * 0.06,
+              width: mediaWidth * 0.67,
+              child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      shape: StadiumBorder(),
+                      backgroundColor: Color(0xff7FD958)),
+                  onPressed: () {
+                    qrCodeController.generateQrCode();
+                  },
+                  child: Text("Finish")),
             )
           ],
         ),

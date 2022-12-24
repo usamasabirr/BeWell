@@ -43,6 +43,7 @@ dependencies:
   widgets_to_image: ^0.0.2
   loading_overlay: ^0.3.0
   path_provider: ^2.0.11
+  gallery_saver: ^2.3.2
   firebase_core: ^1.10.6
   firebase_database: ^9.0.4
   cloud_firestore: ^3.1.5

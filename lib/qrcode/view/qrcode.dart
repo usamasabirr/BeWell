@@ -1,4 +1,5 @@
 import 'package:be_well/qrcode/controller/qrcode_controller.dart';
+import 'package:be_well/qrcode/view/qr_info_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -15,6 +16,21 @@ class QrCode extends StatefulWidget {
 
 class _QrCodeState extends State<QrCode> {
   QrCodeController qrCodeController = Get.put(QrCodeController());
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    qrCodeController.checkIfQrCode();
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    Get.delete();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     var mediaHeight = MediaQuery.of(context).size.height;
@@ -38,14 +54,14 @@ class _QrCodeState extends State<QrCode> {
                 SizedBox(
                   width: 10,
                 ),
-                InkWell(
-                  onTap: () {
-                    Get.back();
-                  },
-                  child: Icon(
-                    Icons.arrow_back,
-                  ),
-                ),
+                // InkWell(
+                //   onTap: () {
+                //     Get.back();
+                //   },
+                //   child: Icon(
+                //     Icons.arrow_back,
+                //   ),
+                // ),
                 Expanded(
                   child: SizedBox(),
                 ),
@@ -118,14 +134,26 @@ class _QrCodeState extends State<QrCode> {
             SizedBox(
               height: mediaHeight * 0.06,
               width: mediaWidth * 0.67,
-              child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                      shape: StadiumBorder(),
-                      backgroundColor: Color(0xff7FD958)),
-                  onPressed: () {
-                    qrCodeController.generateQrCode();
-                  },
-                  child: Text("Generate Qr Code")),
+              child: qrCodeController.showQrCode == false
+                  ? ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          shape: StadiumBorder(),
+                          backgroundColor: Color(0xff7FD958)),
+                      onPressed: () {
+                        Get.to(QrInfoImage());
+                        //qrCodeController.generateQrCode();
+                      },
+                      child: Text("Generate Qr Code"))
+                  : ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          shape: StadiumBorder(),
+                          backgroundColor: Color(0xff7FD958)),
+                      onPressed: () {
+                        qrCodeController.saveQrCodeToGallery();
+                        //Get.to(QrInfoImage());
+                        //qrCodeController.generateQrCode();
+                      },
+                      child: Text("Save Image")),
             )
           ],
         ),
