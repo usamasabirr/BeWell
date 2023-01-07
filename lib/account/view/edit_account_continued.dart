@@ -8,6 +8,8 @@ import 'package:get/get.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:widgets_to_image/widgets_to_image.dart';
 
+import '../controller/account_controller.dart';
+
 class EditAccountContinued extends StatefulWidget {
   const EditAccountContinued({super.key});
 
@@ -16,7 +18,7 @@ class EditAccountContinued extends StatefulWidget {
 }
 
 class _EditAccountContinuedState extends State<EditAccountContinued> {
-  AuthController authController = Get.find();
+  AccountController accountController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -82,9 +84,11 @@ class _EditAccountContinuedState extends State<EditAccountContinued> {
                             "O+",
                             "O-"
                           ],
+                          // controller:
+                          //     accountController.bloodDropDownController.value,
                           onChanged: (dynamic item) {
                             //print('item is $item');
-                            authController.bloodType = item.toString();
+                            accountController.bloodType = item.toString();
                           },
                           decoration: InputDecoration(
                               border: OutlineInputBorder(
@@ -93,49 +97,51 @@ class _EditAccountContinuedState extends State<EditAccountContinued> {
                               labelText: "Blood Type"),
                           dropdownHeight: 180,
                         ),
-                        Obx((() => authController.bloodTypeError.value == true
-                            ? Container(
-                                alignment: Alignment.topLeft,
-                                margin: EdgeInsets.only(top: 5, left: 5),
-                                child: Text(
-                                  "* Please select blood type",
-                                  style: TextStyle(color: Colors.red),
-                                ))
-                            : SizedBox())),
+                        Obx((() =>
+                            accountController.bloodTypeError.value == true
+                                ? Container(
+                                    alignment: Alignment.topLeft,
+                                    margin: EdgeInsets.only(top: 5, left: 5),
+                                    child: Text(
+                                      "* Please select blood type",
+                                      style: TextStyle(color: Colors.red),
+                                    ))
+                                : SizedBox())),
+                        // SizedBox(
+                        //   height: 10,
+                        // ),
+                        // TextFormField(
+                        //   decoration: InputDecoration(
+                        //       border: OutlineInputBorder(
+                        //           borderRadius: BorderRadius.circular(10)),
+                        //       label: Text('Allergies'),
+                        //       hintText: "Enter allergies"),
+                        // ),
+                        // SizedBox(
+                        //   height: 10,
+                        // ),
+                        // TextFormField(
+                        //   decoration: InputDecoration(
+                        //       border: OutlineInputBorder(
+                        //           borderRadius: BorderRadius.circular(10)),
+                        //       label: Text('Diseases'),
+                        //       hintText: "Enter diseases"),
+                        // ),
+                        // SizedBox(
+                        //   height: 10,
+                        // ),
+                        // TextFormField(
+                        //   decoration: InputDecoration(
+                        //       border: OutlineInputBorder(
+                        //           borderRadius: BorderRadius.circular(10)),
+                        //       label: Text('Weight'),
+                        //       hintText: "Enter weight (kg)"),
+                        // ),
                         SizedBox(
                           height: 10,
                         ),
                         TextFormField(
-                          decoration: InputDecoration(
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10)),
-                              label: Text('Allergies'),
-                              hintText: "Enter allergies"),
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        TextFormField(
-                          decoration: InputDecoration(
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10)),
-                              label: Text('Diseases'),
-                              hintText: "Enter diseases"),
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        TextFormField(
-                          decoration: InputDecoration(
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10)),
-                              label: Text('Weight'),
-                              hintText: "Enter weight (kg)"),
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        TextFormField(
+                          controller: accountController.heightController,
                           decoration: InputDecoration(
                               border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(10)),
@@ -149,7 +155,7 @@ class _EditAccountContinuedState extends State<EditAccountContinued> {
                           options: ["Male", "Female"],
                           onChanged: (dynamic item) {
                             print('item is $item');
-                            authController.genderType = item.toString();
+                            accountController.genderType = item.toString();
                           },
                           decoration: InputDecoration(
                               border: OutlineInputBorder(
@@ -158,15 +164,16 @@ class _EditAccountContinuedState extends State<EditAccountContinued> {
                               labelText: "Gender"),
                           dropdownHeight: 180,
                         ),
-                        Obx((() => authController.genderTypeError.value == true
-                            ? Container(
-                                alignment: Alignment.topLeft,
-                                margin: EdgeInsets.only(top: 5, left: 5),
-                                child: Text(
-                                  "* Please select gender",
-                                  style: TextStyle(color: Colors.red),
-                                ))
-                            : SizedBox())),
+                        Obx((() =>
+                            accountController.genderTypeError.value == true
+                                ? Container(
+                                    alignment: Alignment.topLeft,
+                                    margin: EdgeInsets.only(top: 5, left: 5),
+                                    child: Text(
+                                      "* Please select gender",
+                                      style: TextStyle(color: Colors.red),
+                                    ))
+                                : SizedBox())),
                         SizedBox(
                           height: 10,
                         ),
@@ -177,6 +184,7 @@ class _EditAccountContinuedState extends State<EditAccountContinued> {
                           height: 10,
                         ),
                         TextFormField(
+                          controller: accountController.familyNumberController,
                           decoration: InputDecoration(
                               border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(10)),
@@ -187,11 +195,12 @@ class _EditAccountContinuedState extends State<EditAccountContinued> {
                           height: 10,
                         ),
                         TextFormField(
+                            controller: accountController.familyNameController,
                             decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10)),
-                          label: Text('Friend or Family Name'),
-                        )),
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10)),
+                              label: Text('Friend or Family Name'),
+                            )),
                         SizedBox(
                           height: 10,
                         ),
@@ -202,6 +211,7 @@ class _EditAccountContinuedState extends State<EditAccountContinued> {
                           height: 10,
                         ),
                         TextFormField(
+                          controller: accountController.doctorNameController,
                           decoration: InputDecoration(
                               border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(10)),
@@ -212,6 +222,7 @@ class _EditAccountContinuedState extends State<EditAccountContinued> {
                           height: 10,
                         ),
                         TextFormField(
+                          controller: accountController.doctorNameController,
                           decoration: InputDecoration(
                               border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(10)),
@@ -238,24 +249,21 @@ class _EditAccountContinuedState extends State<EditAccountContinued> {
                         shape: StadiumBorder(),
                         backgroundColor: Color(0xff7FD958)),
                     onPressed: () async {
-                      if (authController.bloodType == '') {
-                        authController.bloodTypeError.value = true;
+                      if (accountController.bloodType == '') {
+                        accountController.bloodTypeError.value = true;
                       } else {
-                        authController.bloodTypeError.value = false;
+                        accountController.bloodTypeError.value = false;
                       }
-                      if (authController.genderType == '') {
-                        authController.genderTypeError.value = true;
+                      if (accountController.genderType == '') {
+                        accountController.genderTypeError.value = true;
                       } else {
-                        authController.genderTypeError.value = false;
+                        accountController.genderTypeError.value = false;
                       }
-                      //authController.registerWithEmailAndPassword();
-                      // qrCodeDialogBox();
-                      // authController.bytes =
-                      //     await authController.controller.capture();
-                      // print(authController.bytes);
+                      accountController.updateData();
+                      // print(accountController.bytes);
                       // Get.offAll(LoginOrSignup());
                     },
-                    child: Text("SIGN UP")),
+                    child: Text("Update Info")),
               ),
             ],
           ),
@@ -269,7 +277,7 @@ class _EditAccountContinuedState extends State<EditAccountContinued> {
     //     title: "Qr Code",
     //     content: FittedBox(
     //       child: WidgetsToImage(
-    //         controller: authController.controller,
+    //         controller: accountController.controller,
     //         child: Container(
     //           height: 200,
     //           width: 200,
@@ -295,14 +303,14 @@ class _EditAccountContinuedState extends State<EditAccountContinued> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    WidgetsToImage(
-                      controller: authController.controller,
-                      child: QrImage(
-                        data: "1234567890",
-                        version: QrVersions.auto,
-                        size: 200.0,
-                      ),
-                    ),
+                    // WidgetsToImage(
+                    //   controller: accountController.widgetsToImageController,
+                    //   child: QrImage(
+                    //     data: "1234567890",
+                    //     version: QrVersions.auto,
+                    //     size: 200.0,
+                    //   ),
+                    // ),
                     SizedBox(
                       width: 320.0,
                       child: ElevatedButton(

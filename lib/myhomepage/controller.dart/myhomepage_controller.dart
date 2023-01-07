@@ -7,12 +7,24 @@ class MyHomePageController extends GetxController {
 
   Future<void> getUserInfo() async {
     print('Start: getUserInfo');
-    userInfo.userInfoLink =
-        'https://firebasestorage.googleapis.com/v0/b/bewell-ecf2e.appspot.com/o/Usamabinsabir?alt=media&token=f978c36c-da88-4edd-a270-0511b7fcf16b';
+    userInfo.userInfoLink = '';
     userInfo.userId = "XtWW8phhI9QpGBuXYKfHVGG9XZ13";
+    userInfo.docId = "ZRSUxSPJtDotfdnB6BtR";
     userInfo.name = "Usama";
     userInfo.email = "usamasabir4321@gmail.com";
     userInfo.password = "123456";
+    userInfo.confirmPassword = "";
     userInfo.username = "_1234";
+    userInfo.dateOfBirth = "22-10-2022";
+    userInfo.allergies = "Skin Rash";
+    userInfo.diseases = '';
+    userInfo.weight = '';
+    userInfo.bloodType = 'AB+';
+    userInfo.height = '';
+    userInfo.gender = 'Male';
+    userInfo.friendNumber = '';
+    userInfo.friendName = 'Ahmed';
+    userInfo.doctorNumber = '';
+    userInfo.doctorName = 'Shaukat';
   }
 }

@@ -1,3 +1,4 @@
+import 'package:be_well/account/controller/account_controller.dart';
 import 'package:be_well/account/view/edit_account_continued.dart';
 import 'package:be_well/auth/controller/auth_controller.dart';
 import 'package:be_well/auth/view/signup_continued.dart';
@@ -18,7 +19,7 @@ class EditAccount extends StatefulWidget {
 
 class _EditAccountState extends State<EditAccount> {
   final _formKey = GlobalKey<FormState>();
-  AuthController authController = Get.put(AuthController());
+  AccountController accountController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -128,7 +129,7 @@ class _EditAccountState extends State<EditAccount> {
                                               BorderRadius.circular(10)),
                                       label: Text('Name'),
                                       hintText: "Enter name"),
-                                  controller: authController.nameController,
+                                  controller: accountController.nameController,
                                   validator: (value) {
                                     if (value == null || value.isEmpty) {
                                       return '* Please enter name';
@@ -140,24 +141,24 @@ class _EditAccountState extends State<EditAccount> {
                                   height: mediaHeight * 0.01,
                                 ),
                                 //email
-                                TextFormField(
-                                  decoration: InputDecoration(
-                                      border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(10)),
-                                      label: Text('Email'),
-                                      hintText: "Enter email"),
-                                  controller: authController.emailController,
-                                  validator: (value) {
-                                    if (value == null || value.isEmpty) {
-                                      return '* Please enter email';
-                                    }
-                                    return null;
-                                  },
-                                ),
-                                SizedBox(
-                                  height: mediaHeight * 0.01,
-                                ),
+                                // TextFormField(
+                                //   decoration: InputDecoration(
+                                //       border: OutlineInputBorder(
+                                //           borderRadius:
+                                //               BorderRadius.circular(10)),
+                                //       label: Text('Email'),
+                                //       hintText: "Enter email"),
+                                //   controller: accountController.emailController,
+                                //   validator: (value) {
+                                //     if (value == null || value.isEmpty) {
+                                //       return '* Please enter email';
+                                //     }
+                                //     return null;
+                                //   },
+                                // ),
+                                // SizedBox(
+                                //   height: mediaHeight * 0.01,
+                                // ),
                                 //username
                                 TextFormField(
                                   decoration: InputDecoration(
@@ -166,7 +167,8 @@ class _EditAccountState extends State<EditAccount> {
                                               BorderRadius.circular(10)),
                                       label: Text('Username'),
                                       hintText: "Enter username"),
-                                  controller: authController.usernameController,
+                                  controller:
+                                      accountController.usernameController,
                                   validator: (value) {
                                     if (value == null || value.isEmpty) {
                                       return '* Please enter username';
@@ -178,48 +180,49 @@ class _EditAccountState extends State<EditAccount> {
                                   height: mediaHeight * 0.01,
                                 ),
                                 //password
-                                TextFormField(
-                                  decoration: InputDecoration(
-                                      border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(10)),
-                                      label: Text('password'),
-                                      hintText: "Enter password"),
-                                  controller: authController.passwordController,
-                                  validator: (value) {
-                                    if (value == null || value.isEmpty) {
-                                      return '* Please enter password';
-                                    }
-                                    return null;
-                                  },
-                                ),
-                                SizedBox(
-                                  height: mediaHeight * 0.01,
-                                ),
-                                //confirmPassword
-                                TextFormField(
-                                  decoration: InputDecoration(
-                                      border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(10)),
-                                      label: Text('Confirm password'),
-                                      hintText: "Enter password again"),
-                                  controller:
-                                      authController.confirmPasswordController,
-                                  validator: (value) {
-                                    if (value == null || value.isEmpty) {
-                                      return '* Please confirm password';
-                                    } else if (value !=
-                                        authController
-                                            .passwordController.text) {
-                                      return 'Password mismatch';
-                                    }
-                                    return null;
-                                  },
-                                ),
-                                SizedBox(
-                                  height: mediaHeight * 0.01,
-                                ),
+                                // TextFormField(
+                                //   decoration: InputDecoration(
+                                //       border: OutlineInputBorder(
+                                //           borderRadius:
+                                //               BorderRadius.circular(10)),
+                                //       label: Text('password'),
+                                //       hintText: "Enter password"),
+                                //   controller:
+                                //       accountController.passwordController,
+                                //   validator: (value) {
+                                //     if (value == null || value.isEmpty) {
+                                //       return '* Please enter password';
+                                //     }
+                                //     return null;
+                                //   },
+                                // ),
+                                // SizedBox(
+                                //   height: mediaHeight * 0.01,
+                                // ),
+                                // //confirmPassword
+                                // TextFormField(
+                                //   decoration: InputDecoration(
+                                //       border: OutlineInputBorder(
+                                //           borderRadius:
+                                //               BorderRadius.circular(10)),
+                                //       label: Text('Confirm password'),
+                                //       hintText: "Enter password again"),
+                                //   controller: accountController
+                                //       .confirmPasswordController,
+                                //   validator: (value) {
+                                //     if (value == null || value.isEmpty) {
+                                //       return '* Please confirm password';
+                                //     } else if (value !=
+                                //         accountController
+                                //             .passwordController.text) {
+                                //       return 'Password mismatch';
+                                //     }
+                                //     return null;
+                                //   },
+                                // ),
+                                // SizedBox(
+                                //   height: mediaHeight * 0.01,
+                                // ),
                                 //date of birth
                                 TextFormField(
                                   validator: (value) {
@@ -228,7 +231,7 @@ class _EditAccountState extends State<EditAccount> {
                                     }
                                     return null;
                                   },
-                                  controller: authController.dateController,
+                                  controller: accountController.dateController,
                                   onTap: () async {
                                     DateTime? pickedDate = await showDatePicker(
                                         context: context,
@@ -248,7 +251,7 @@ class _EditAccountState extends State<EditAccount> {
                                       //You can format date as per your need
 
                                       setState(() {
-                                        authController.dateController.text =
+                                        accountController.dateController.text =
                                             formattedDate; //set foratted date to TextField value.
                                       });
                                     } else {
@@ -262,6 +265,45 @@ class _EditAccountState extends State<EditAccount> {
                                               BorderRadius.circular(10)),
                                       label: Text('Date of birth'),
                                       hintText: "Enter dob"),
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                TextFormField(
+                                  controller:
+                                      accountController.allergiesController,
+                                  decoration: InputDecoration(
+                                      border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(10)),
+                                      label: Text('Allergies'),
+                                      hintText: "Enter allergies"),
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                TextFormField(
+                                  controller:
+                                      accountController.diseasesController,
+                                  decoration: InputDecoration(
+                                      border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(10)),
+                                      label: Text('Diseases'),
+                                      hintText: "Enter diseases"),
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                TextFormField(
+                                  controller:
+                                      accountController.weightController,
+                                  decoration: InputDecoration(
+                                      border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(10)),
+                                      label: Text('Weight'),
+                                      hintText: "Enter weight (kg)"),
                                 ),
 
                                 //Forgot your password

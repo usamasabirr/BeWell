@@ -1,5 +1,6 @@
 class User {
   late String userId;
+  late String docId;
   late String userInfoLink;
   late String name;
   late String email;
@@ -20,6 +21,7 @@ class User {
 
   User(
       {userId,
+      docId,
       userInfoLink,
       name,
       email,
@@ -40,6 +42,8 @@ class User {
 
   User.empty() {
     userId:
+    '';
+    docId:
     '';
     userInfoLink:
     '';

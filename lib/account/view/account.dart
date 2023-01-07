@@ -1,3 +1,4 @@
+import 'package:be_well/account/controller/account_controller.dart';
 import 'package:be_well/account/view/edit_account.dart';
 import 'package:be_well/qrcode/controller/qrcode_controller.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +16,15 @@ class Account extends StatefulWidget {
 }
 
 class _AccountState extends State<Account> {
+  AccountController accountController = Get.put(AccountController());
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    accountController.setPreviousData();
+  }
+
   @override
   Widget build(BuildContext context) {
     var mediaHeight = MediaQuery.of(context).size.height;
@@ -38,15 +48,19 @@ class _AccountState extends State<Account> {
                 SizedBox(
                   width: 10,
                 ),
-                InkWell(
-                  onTap: () {
-                    Get.back();
-                  },
-                  child: Icon(
-                    Icons.arrow_back,
-                    size: mediaHeight * 0.04,
-                  ),
-                ),
+                // Opacity(
+
+                //   child: InkWell(
+
+                //     onTap: () {
+                //       Get.back();
+                //     },
+                //     child: Icon(
+                //       Icons.arrow_back,
+                //       size: mediaHeight * 0.04,
+                //     ),
+                //   ),
+                // ),
                 Opacity(
                   opacity: 0.0,
                   child: Image.asset(
@@ -74,7 +88,7 @@ class _AccountState extends State<Account> {
                   ),
                 ),
                 SizedBox(
-                  width: 10 + mediaHeight * 0.04,
+                  width: 10,
                 ),
               ]),
             ),
