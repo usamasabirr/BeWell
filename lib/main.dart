@@ -8,6 +8,8 @@ import 'package:be_well/home/view/home.dart';
 import 'package:be_well/myhomepage/view/myHomePage.dart';
 import 'package:be_well/qrcode/view/qr_info_image.dart';
 import 'package:be_well/qrcode/view/qrcode.dart';
+import 'package:be_well/reminder/medicineReminder/model/medicine_reminder_model.dart';
+import 'package:be_well/reminder/medicineReminder/view/medicine_reminder.dart';
 import 'package:be_well/reminder/model/sleep_reminder_model.dart';
 import 'package:be_well/reminder/reminderHome.dart';
 import 'package:be_well/reminder/view/sleepReminder.dart';
@@ -30,9 +32,11 @@ Future<void> main() async {
 
   Hive.registerAdapter(SleepMonitorModelAdapter());
   Hive.registerAdapter(SleepReminderModelAdapter());
+  Hive.registerAdapter(MedicineReminderModelAdapter());
 
   await Hive.openBox<SleepMonitorModel>('SleepMonitor');
   await Hive.openBox<SleepReminderModel>('SleepReminder');
+  await Hive.openBox<MedicineReminderModel>('MedicineReminder');
 
   runApp(const MyApp());
 }
@@ -47,7 +51,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: SleepReminder(),
+      home: MedicineReminder(),
     );
   }
 }
