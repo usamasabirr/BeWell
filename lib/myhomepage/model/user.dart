@@ -41,43 +41,24 @@ class User {
       doctorNumber});
 
   User.empty() {
-    userId:
-    '';
-    docId:
-    '';
-    userInfoLink:
-    '';
-    name:
-    '';
-    email:
-    '';
-    username:
-    '';
-    password:
-    '';
-    confirmPassword:
-    '';
-    dateOfBirth:
-    '';
-    bloodType:
-    '';
-    allergies:
-    '';
-    diseases:
-    '';
-    weight:
-    '';
-    height:
-    '';
-    gender:
-    '';
-    friendName:
-    '';
-    friendNumber:
-    '';
-    doctorName:
-    '';
-    doctorNumbr:
-    '';
+    userId = '';
+    docId = '';
+    userInfoLink = '';
+    name = '';
+    email = '';
+    username = '';
+    password = '';
+    confirmPassword = '';
+    dateOfBirth = '';
+    bloodType = '';
+    allergies = '';
+    diseases = '';
+    weight = '';
+    height = '';
+    gender = '';
+    friendName = '';
+    friendNumber = '';
+    doctorName = '';
+    doctorNumber = '';
   }
 }

@@ -39,7 +39,7 @@ class AccountController extends GetxController {
       DropdownEditingController();
 
   setPreviousData() {
-    previousData = myHomePageController.userInfo;
+    previousData = myHomePageController.userInfo.value;
 
     nameController.text = previousData.name;
     usernameController.text = previousData.username;
@@ -81,8 +81,16 @@ class AccountController extends GetxController {
         'familyNumber': familyNumberController.text,
         'familyName': familyNameController.text,
         'doctorNumber': doctorNumberController.text,
-        'doctorName': doctorNameController.text
+        'doctorName': doctorNameController.text,
+        'userInfoLink': ''
       });
+      await myHomePageController.getUserInfo();
+      Get.showSnackbar(GetSnackBar(
+        duration: Duration(seconds: 3),
+        title: 'Success',
+        backgroundColor: Colors.green,
+        message: 'Data updated successfully',
+      ));
     } catch (err) {
       print('edit user infor error is $err');
     }

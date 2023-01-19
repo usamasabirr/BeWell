@@ -1,6 +1,11 @@
+import 'package:be_well/myhomepage/controller.dart/myhomepage_controller.dart';
+import 'package:be_well/sleep/view/sleep.dart';
+import 'package:be_well/sleep/view/weekly_sleep_monitor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -10,6 +15,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  MyHomePageController myHomePageController = Get.find();
   @override
   Widget build(BuildContext context) {
     var mediaHeight = MediaQuery.of(context).size.height;
@@ -46,10 +52,12 @@ class _HomeState extends State<Home> {
                               fontSize: 22,
                               fontWeight: FontWeight.bold),
                         ),
-                        Text(
-                          "Amirah",
-                          style: TextStyle(
-                              fontWeight: FontWeight.w500, fontSize: 18),
+                        Obx(
+                          () => Text(
+                            myHomePageController.userInfo.value.username,
+                            style: TextStyle(
+                                fontWeight: FontWeight.w500, fontSize: 18),
+                          ),
                         )
                       ],
                     ),
@@ -138,16 +146,21 @@ class _HomeState extends State<Home> {
                     Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Container(
-                            height: mediaWidth * 0.2,
-                            width: mediaWidth * 0.2,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color: Colors.blue[900],
-                            ),
-                            child: Image.asset(
-                              'assets/images/sleep.png',
-                              fit: BoxFit.fill,
+                          InkWell(
+                            onTap: () {
+                              Get.to(Sleep());
+                            },
+                            child: Container(
+                              height: mediaWidth * 0.2,
+                              width: mediaWidth * 0.2,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: Colors.blue[900],
+                              ),
+                              child: Image.asset(
+                                'assets/images/sleep.png',
+                                fit: BoxFit.fill,
+                              ),
                             ),
                           ),
                           SizedBox(

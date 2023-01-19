@@ -37,7 +37,11 @@ class _SleepState extends State<Sleep> {
             height: mediaHeight * 0.1,
             width: mediaWidth,
             child: Row(children: [
-              Icon(Icons.arrow_back),
+              InkWell(
+                  onTap: () {
+                    Get.back();
+                  },
+                  child: Icon(Icons.arrow_back)),
               Expanded(
                 child: SizedBox(),
               ),

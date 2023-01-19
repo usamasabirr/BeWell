@@ -63,16 +63,48 @@ class SleepController extends GetxController {
   }
 
   calculateSleepTime() {
-    print(sleepMonitorBox.get(0));
-    int sleepHour = (defaultWakeHour - defaultSleepHour).abs();
-    int sleepMin = (defaultWakeMin - defaultSleepMin).abs();
-    double value = sleepHour + sleepMin / 100;
-    print('value is $value');
+    int totalRemMin = 0;
+    //print(sleepMonitorBox.get(0));
+    if (defaultSleepHour <= defaultWakeHour) {
+      int remHour = defaultWakeHour - defaultSleepHour;
+      totalRemMin = remHour * 60;
+      int remMin = (defaultWakeMin - defaultSleepMin).abs();
+      if (defaultWakeMin > defaultSleepMin) {
+        totalRemMin = totalRemMin + remMin;
+      } else {
+        totalRemMin = totalRemMin - remMin;
+      }
+    } else {
+      int remHour = 24 - defaultSleepHour;
+      remHour += defaultWakeHour;
+      // if (remHour < 0) {
+      //   remHour -= 24;
+      // } else {
+      //   int temp = 24 - defaultSleepHour;
+      //   remHour += temp;
+      // }
+      totalRemMin = remHour * 60;
+      int remMin = (defaultWakeMin - defaultSleepMin).abs();
+      if (defaultWakeMin > defaultSleepMin) {
+        totalRemMin = totalRemMin + remMin;
+      } else {
+        totalRemMin = totalRemMin - remMin;
+      }
+    }
+    print('total $totalRemMin');
+
+    double result = totalRemMin / 60;
+
+    // int sleepHour = (defaultWakeHour - defaultSleepHour).abs();
+    // int sleepHourInMin = sleepHour * 60;
+    // int sleepMin = (defaultWakeMin - defaultSleepMin).abs();
+    // double value = sleepHour + sleepMin / 100;
+    // print('value is $value');
     DateTime date = DateTime.now();
     String currentDay = DateFormat('EEEE').format(date);
-
+    print('currentDay is $currentDay');
     SleepMonitorModel temp = SleepMonitorModel();
-    temp.weekDay[currentDay] = value;
+    temp.weekDay[currentDay] = result;
     temp.weekDay['Monday'] = 10.0;
     temp.weekDay['Saturday'] = 15.0;
 

@@ -20,11 +20,13 @@ class _MedicineReminderState extends State<MedicineReminder> {
   MedicineReminderController medicineReminderController =
       Get.put(MedicineReminderController());
   DateTime selectedDate = DateTime.now();
-
+  final _formKey = GlobalKey<FormState>();
   @override
   void initState() {
     // TODO: implement initState
+    //medicineReminderController.medicineReminderBox.clear();
     medicineReminderController.setCurrentTime();
+    medicineReminderController.getSavedReminders();
     super.initState();
   }
 
@@ -81,17 +83,26 @@ class _MedicineReminderState extends State<MedicineReminder> {
           Container(
             margin: EdgeInsets.symmetric(horizontal: mediaWidth * 0.12),
             child: Center(
-                child: TextField(
-              controller: medicineReminderController.medicineNameController,
-              decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  hintText: 'Enter medicine name'),
+                child: Form(
+              key: _formKey,
+              child: TextFormField(
+                controller: medicineReminderController.medicineNameController,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return '* Please enter medicine name';
+                  }
+                  return null;
+                },
+                decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    hintText: 'Enter medicine name'),
+              ),
             )),
           ),
 
           //intake Time
           SizedBox(
-            height: 20,
+            height: 15,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -180,7 +191,7 @@ class _MedicineReminderState extends State<MedicineReminder> {
           ),
 
           SizedBox(
-            height: mediaHeight * 0.05,
+            height: 15,
           ),
 
           //which Day
@@ -199,7 +210,7 @@ class _MedicineReminderState extends State<MedicineReminder> {
             ],
           ),
           SizedBox(
-            height: 5,
+            height: 10,
           ),
           GestureDetector(
             onTap: () {
@@ -227,6 +238,9 @@ class _MedicineReminderState extends State<MedicineReminder> {
           ),
 
           //Save or cancel
+          SizedBox(
+            height: mediaHeight * 0.05,
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
@@ -238,8 +252,10 @@ class _MedicineReminderState extends State<MedicineReminder> {
                         shape: StadiumBorder(),
                         backgroundColor: Color(0xff7FD958)),
                     onPressed: () async {
+                      if (_formKey.currentState!.validate()) {
+                        medicineReminderController.saveReminder();
+                      }
                       //medicineReminderController.getReminderDuration();
-                      medicineReminderController.saveReminder();
                     },
                     child: Text("Save")),
               ),
@@ -261,55 +277,81 @@ class _MedicineReminderState extends State<MedicineReminder> {
               ),
             ],
           ),
-
+          //Alarm
+          SizedBox(
+            height: 10,
+          ),
+          Container(
+            margin: EdgeInsets.only(left: 10),
+            child: Align(
+              alignment: Alignment.topLeft,
+              child: Text(
+                'Alarm',
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.w500),
+              ),
+            ),
+          ),
+          SizedBox(
+            height: 10,
+          ),
           //List of saved Reminders
           Expanded(
-            child: Obx(
-              () => ListView.builder(
-                  itemCount:
-                      medicineReminderController.savedReminders.value.length,
-                  itemBuilder: ((context, index) {
-                    return Row(
-                      children: [
-                        Container(
-                          height: mediaHeight * 0.07,
-                          width: mediaWidth * 0.7,
-                          decoration: BoxDecoration(
-                              image: DecorationImage(
-                                  fit: BoxFit.fill,
-                                  image: Image.asset('assets/images/blue.png')
-                                      .image)),
-                          child: Row(
-                            children: [
-                              Image.asset(
-                                'assets/images/bell.png',
-                                height: 30,
-                                width: 40,
-                              ),
-                              Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      '${medicineReminderController.savedReminders[index].hour} : ${medicineReminderController.savedReminders[index].min} ${medicineReminderController.savedReminders[index].zone}',
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 18),
-                                    ),
-                                    Text(
-                                      '${medicineReminderController.savedReminders[index].medicineName}, ${medicineReminderController.savedReminders[index].medicineDate}',
-                                      style: TextStyle(
-                                          color: Colors.white, fontSize: 12),
-                                    ),
-                                  ])
-                            ],
+            child: Container(
+              margin: EdgeInsets.symmetric(horizontal: 10),
+              child: Obx(
+                () => ListView.builder(
+                    itemCount:
+                        medicineReminderController.savedReminders.value.length,
+                    itemBuilder: ((context, index) {
+                      return Row(
+                        children: [
+                          Container(
+                            margin: EdgeInsets.only(bottom: 10),
+                            height: mediaHeight * 0.07,
+                            width: mediaWidth * 0.7,
+                            decoration: BoxDecoration(
+                                image: DecorationImage(
+                                    fit: BoxFit.fill,
+                                    image: Image.asset('assets/images/blue.png')
+                                        .image)),
+                            child: Row(
+                              children: [
+                                Image.asset(
+                                  'assets/images/bell.png',
+                                  height: 30,
+                                  width: 40,
+                                ),
+                                Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        '${medicineReminderController.savedReminders[index].hour} : ${medicineReminderController.savedReminders[index].min} ${medicineReminderController.savedReminders[index].zone}',
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 18),
+                                      ),
+                                      Text(
+                                        '${medicineReminderController.savedReminders[index].medicineName}, ${medicineReminderController.savedReminders[index].medicineDate}',
+                                        style: TextStyle(
+                                            color: Colors.white, fontSize: 12),
+                                      ),
+                                    ])
+                              ],
+                            ),
                           ),
-                        ),
-                        Icon(Icons.delete)
-                      ],
-                    );
-                  })),
+                          InkWell(
+                              onTap: () {
+                                medicineReminderController
+                                    .deleteSavedReminder(index);
+                              },
+                              child: Icon(Icons.delete))
+                        ],
+                      );
+                    })),
+              ),
             ),
           )
         ],

@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:widgets_to_image/widgets_to_image.dart';
 
 class AuthController extends GetxController {
@@ -43,9 +44,8 @@ class AuthController extends GetxController {
   TextEditingController doctorNameController = TextEditingController();
 
   Future<bool> registerWithEmailAndPassword() async {
-    // userLoggedIn.value = !userLoggedIn.value;
-
-    //loading.value = true;
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    loading.value = true;
     try {
       userCredential = await _auth.createUserWithEmailAndPassword(
           email: emailController.text, password: passwordController.text);
@@ -58,7 +58,8 @@ class AuthController extends GetxController {
         return false;
       } else {
         try {
-          await _firestore.collection('Users').add({
+          var response = await _firestore.collection('Users').add({
+            'userId': user.uid,
             'name': nameController.text,
             'email': emailController.text,
             'userName': usernameController.text,
@@ -74,49 +75,25 @@ class AuthController extends GetxController {
             'familyNumber': familyNumberController.text,
             'familyName': familyNameController.text,
             'doctorNumber': doctorNumberController.text,
-            'doctorName': doctorNameController.text
+            'doctorName': doctorNameController.text,
+            'userInfoLink': ''
           });
-          // try {
-          //   var a = await _firestore
-          //       .collection('Users')
-          //       .where('userId', isEqualTo: user.uid)
-          //       .get();
-          //   print('value of a is $a');
-
-          //   a.docs.forEach((element) {
-          //     print('email is ${element.data()['email']}');
-          //     currentUser.userId = element.id;
-          //     currentUser.name = element.data()['name'];
-          //     currentUser.password = element.data()['password'];
-          //     currentUser.eamil = element.data()['email'];
-          //     currentUser.mobileNumber = element.data()['mobileNumber'];
-          //   });
-
-          //   //await user.sendEmailVerification();
-          //   //userLoggedIn.value = true;
-
-          //   loading.value = false;
-          //   return true;
-          //   print('a is $a');
-          // } catch (error) {
-          //   print(error);
-          //   loading.value = false;
-          //   return false;
-          // }
-
+          await _firestore
+              .collection('Users')
+              .doc(response.id)
+              .update({'docId': response.id});
           print('User Uploaded');
+          await sharedPreferences.setBool('userLoggedIn', true);
+          await sharedPreferences.setString('userId', user.uid);
+          loading.value = false;
+          return true;
         } catch (error) {
-          //loading.value = false;
+          loading.value = false;
           return false;
-          print('Error');
         }
-        //loading.value = false;
-        //print('userLoggedIn value is ${userLoggedIn.value}');
-
-        //  print('UserLogged in value is ${userLoggedIn.value}');
       }
     } catch (error) {
-      //loading.value = false;
+      loading.value = false;
       print(error);
       var er = error.toString();
       var err = er.split(']');
@@ -129,23 +106,42 @@ class AuthController extends GetxController {
       ));
       return false;
     }
-    return false;
   }
 
   //singin
   Future<bool> logInWithEmailAndPassword() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     loading.value = true;
     try {
       userCredential = await _auth.signInWithEmailAndPassword(
           email: emailLoginController.text,
           password: passwordLoginController.text);
+
+      await sharedPreferences.setBool('userLoggedIn', true);
+      await sharedPreferences.setString('userId', userCredential.user!.uid);
+      loading.value = false;
+      return true;
     } catch (err) {
       //loading.value = false;
       Get.defaultDialog(title: 'Login Error', content: Text('$err'));
       print('signIN error is $err');
     }
     loading.value = false;
-    if (userCredential.isBlank == true) {
+    return false;
+  }
+
+  Future<bool> logout() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    await _auth.signOut();
+    sharedPreferences.remove('userId');
+    sharedPreferences.remove('userLoggedIn');
+    return true;
+  }
+
+  Future<bool> checkUserLoggedIn() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    bool? userLoggedIn = sharedPreferences.getBool('userLoggedIn');
+    if (userLoggedIn == null) {
       return false;
     }
     return true;

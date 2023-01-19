@@ -1,10 +1,12 @@
 import 'package:be_well/auth/controller/auth_controller.dart';
 import 'package:be_well/auth/view/login_or_signup.dart';
+import 'package:be_well/myhomepage/view/myHomePage.dart';
 import 'package:dropdown_plus/dropdown_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
+import 'package:loading_overlay/loading_overlay.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:widgets_to_image/widgets_to_image.dart';
 
@@ -16,250 +18,273 @@ class SignupContinued extends StatefulWidget {
 }
 
 class _SignupContinuedState extends State<SignupContinued> {
-  AuthController authController = Get.find();
+  AuthController authController = Get.find<AuthController>();
+
+  @override
+  void dispose() {
+    authController.bloodTypeError.value = true;
+    authController.bloodTypeError.value = true;
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     var mediaHeight = MediaQuery.of(context).size.height;
     var mediaWidth = MediaQuery.of(context).size.width;
-    return Scaffold(
-      body: SafeArea(
-          child: Container(
-        margin: EdgeInsets.only(left: 10, right: 10),
-        child: SingleChildScrollView(
-          physics: NeverScrollableScrollPhysics(),
-          child: Column(
-            children: [
-              //app bar
-              Row(children: [
-                InkWell(
-                  onTap: () {
-                    Get.back();
-                  },
-                  child: Icon(
-                    Icons.arrow_back,
-                  ),
-                ),
-                Expanded(
-                  child: SizedBox(),
-                ),
-                Image.asset(
-                  'assets/images/logo_only.png',
-                  height: 60,
-                ),
-                Expanded(
-                  child: SizedBox(),
-                ),
-                Icon(
-                  Icons.arrow_back,
-                  color: Colors.white,
-                ),
-              ]),
-              //Form
-              Form(
-                  child: Container(
-                //color: Colors.blue,
-                height: mediaHeight * 0.75,
-                child: Padding(
-                  padding: EdgeInsets.only(
-                          bottom: MediaQuery.of(context).viewInsets.bottom) /
-                      1.4,
-                  child: SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        SizedBox(
-                          height: 10,
-                        ),
-                        TextDropdownFormField(
-                          options: [
-                            "A+",
-                            "B+",
-                            "AB+",
-                            "A-",
-                            "B-",
-                            "AB-",
-                            "O+",
-                            "O-"
-                          ],
-                          onChanged: (dynamic item) {
-                            //print('item is $item');
-                            authController.bloodType = item.toString();
-                          },
-                          decoration: InputDecoration(
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10)),
-                              suffixIcon: Icon(Icons.arrow_drop_down),
-                              labelText: "Blood Type"),
-                          dropdownHeight: 180,
-                        ),
-                        Obx((() => authController.bloodTypeError.value == true
-                            ? Container(
-                                alignment: Alignment.topLeft,
-                                margin: EdgeInsets.only(top: 5, left: 5),
-                                child: Text(
-                                  "* Please select blood type",
-                                  style: TextStyle(color: Colors.red),
-                                ))
-                            : SizedBox())),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        TextFormField(
-                          decoration: InputDecoration(
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10)),
-                              label: Text('Allergies'),
-                              hintText: "Enter allergies"),
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        TextFormField(
-                          decoration: InputDecoration(
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10)),
-                              label: Text('Diseases'),
-                              hintText: "Enter diseases"),
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        TextFormField(
-                          decoration: InputDecoration(
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10)),
-                              label: Text('Weight'),
-                              hintText: "Enter weight (kg)"),
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        TextFormField(
-                          decoration: InputDecoration(
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10)),
-                              label: Text('Height'),
-                              hintText: "Enter height (cm)"),
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        TextDropdownFormField(
-                          options: ["Male", "Female"],
-                          onChanged: (dynamic item) {
-                            print('item is $item');
-                            authController.genderType = item.toString();
-                          },
-                          decoration: InputDecoration(
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10)),
-                              suffixIcon: Icon(Icons.arrow_drop_down),
-                              labelText: "Gender"),
-                          dropdownHeight: 180,
-                        ),
-                        Obx((() => authController.genderTypeError.value == true
-                            ? Container(
-                                alignment: Alignment.topLeft,
-                                margin: EdgeInsets.only(top: 5, left: 5),
-                                child: Text(
-                                  "* Please select gender",
-                                  style: TextStyle(color: Colors.red),
-                                ))
-                            : SizedBox())),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Align(
-                            alignment: Alignment.topLeft,
-                            child: Text('(in case of emergency)')),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        TextFormField(
-                          decoration: InputDecoration(
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10)),
-                              label: Text('Friend or Family Number'),
-                              hintText: "(+966)"),
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        TextFormField(
-                            decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10)),
-                          label: Text('Friend or Family Name'),
-                        )),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Align(
-                            alignment: Alignment.topLeft,
-                            child: Text('(in case of emergency)')),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        TextFormField(
-                          decoration: InputDecoration(
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10)),
-                              label: Text('Doctor Number'),
-                              hintText: "(+966)"),
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        TextFormField(
-                          decoration: InputDecoration(
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10)),
-                              label: Text('Doctor Name'),
-                              hintText: "(+966)"),
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                      ],
+    return Obx(
+      () => LoadingOverlay(
+        isLoading: authController.loading.value,
+        child: Scaffold(
+          body: SafeArea(
+              child: Container(
+            margin: EdgeInsets.only(left: 10, right: 10),
+            child: SingleChildScrollView(
+              physics: NeverScrollableScrollPhysics(),
+              child: Column(
+                children: [
+                  //app bar
+                  Row(children: [
+                    InkWell(
+                      onTap: () {
+                        Get.back();
+                      },
+                      child: Icon(
+                        Icons.arrow_back,
+                      ),
                     ),
+                    Expanded(
+                      child: SizedBox(),
+                    ),
+                    Image.asset(
+                      'assets/images/logo_only.png',
+                      height: 60,
+                    ),
+                    Expanded(
+                      child: SizedBox(),
+                    ),
+                    Icon(
+                      Icons.arrow_back,
+                      color: Colors.white,
+                    ),
+                  ]),
+                  //Form
+                  Form(
+                      child: Container(
+                    //color: Colors.blue,
+                    height: mediaHeight * 0.75,
+                    child: Padding(
+                      padding: EdgeInsets.only(
+                              bottom:
+                                  MediaQuery.of(context).viewInsets.bottom) /
+                          1.4,
+                      child: SingleChildScrollView(
+                        child: Column(
+                          children: [
+                            SizedBox(
+                              height: 10,
+                            ),
+                            TextDropdownFormField(
+                              options: [
+                                "A+",
+                                "B+",
+                                "AB+",
+                                "A-",
+                                "B-",
+                                "AB-",
+                                "O+",
+                                "O-"
+                              ],
+                              onChanged: (dynamic item) {
+                                //print('item is $item');
+                                authController.bloodType = item.toString();
+                              },
+                              decoration: InputDecoration(
+                                  border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(10)),
+                                  suffixIcon: Icon(Icons.arrow_drop_down),
+                                  labelText: "Blood Type"),
+                              dropdownHeight: 180,
+                            ),
+                            Obx((() => authController.bloodTypeError.value ==
+                                    true
+                                ? Container(
+                                    alignment: Alignment.topLeft,
+                                    margin: EdgeInsets.only(top: 5, left: 5),
+                                    child: Text(
+                                      "* Please select blood type",
+                                      style: TextStyle(color: Colors.red),
+                                    ))
+                                : SizedBox())),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            TextFormField(
+                              decoration: InputDecoration(
+                                  border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(10)),
+                                  label: Text('Allergies'),
+                                  hintText: "Enter allergies"),
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            TextFormField(
+                              decoration: InputDecoration(
+                                  border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(10)),
+                                  label: Text('Diseases'),
+                                  hintText: "Enter diseases"),
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            TextFormField(
+                              decoration: InputDecoration(
+                                  border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(10)),
+                                  label: Text('Weight'),
+                                  hintText: "Enter weight (kg)"),
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            TextFormField(
+                              decoration: InputDecoration(
+                                  border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(10)),
+                                  label: Text('Height'),
+                                  hintText: "Enter height (cm)"),
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            TextDropdownFormField(
+                              options: ["Male", "Female"],
+                              onChanged: (dynamic item) {
+                                print('item is $item');
+                                authController.genderType = item.toString();
+                              },
+                              decoration: InputDecoration(
+                                  border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(10)),
+                                  suffixIcon: Icon(Icons.arrow_drop_down),
+                                  labelText: "Gender"),
+                              dropdownHeight: 180,
+                            ),
+                            Obx((() => authController.genderTypeError.value ==
+                                    true
+                                ? Container(
+                                    alignment: Alignment.topLeft,
+                                    margin: EdgeInsets.only(top: 5, left: 5),
+                                    child: Text(
+                                      "* Please select gender",
+                                      style: TextStyle(color: Colors.red),
+                                    ))
+                                : SizedBox())),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Align(
+                                alignment: Alignment.topLeft,
+                                child: Text('(in case of emergency)')),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            TextFormField(
+                              decoration: InputDecoration(
+                                  border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(10)),
+                                  label: Text('Friend or Family Number'),
+                                  hintText: "(+966)"),
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            TextFormField(
+                                decoration: InputDecoration(
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10)),
+                              label: Text('Friend or Family Name'),
+                            )),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Align(
+                                alignment: Alignment.topLeft,
+                                child: Text('(in case of emergency)')),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            TextFormField(
+                              decoration: InputDecoration(
+                                  border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(10)),
+                                  label: Text('Doctor Number'),
+                                  hintText: "(+966)"),
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            TextFormField(
+                              decoration: InputDecoration(
+                                  border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(10)),
+                                  label: Text('Doctor Name'),
+                                  hintText: "(+966)"),
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  )),
+                  SizedBox(
+                    height: 10,
                   ),
-                ),
-              )),
-              SizedBox(
-                height: 10,
+                  //singup button
+                  SizedBox(
+                    height: mediaHeight * 0.06,
+                    width: mediaWidth * 0.67,
+                    child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            shape: StadiumBorder(),
+                            backgroundColor: Color(0xff7FD958)),
+                        onPressed: () async {
+                          if (authController.bloodType == '') {
+                            authController.bloodTypeError.value = true;
+                          } else {
+                            authController.bloodTypeError.value = false;
+                          }
+                          if (authController.genderType == '') {
+                            authController.genderTypeError.value = true;
+                          } else {
+                            authController.genderTypeError.value = false;
+                          }
+                          if (authController.bloodTypeError.value == false &&
+                              authController.genderTypeError.value == false) {
+                            bool check = await authController
+                                .registerWithEmailAndPassword();
+                            print('check is $check');
+                            if (check) {
+                              Get.to(MyHomePage());
+                            }
+                          }
+                          // qrCodeDialogBox();
+                          // authController.bytes =
+                          //     await authController.controller.capture();
+                          // print(authController.bytes);
+                          // Get.offAll(LoginOrSignup());
+                        },
+                        child: Text("SIGN UP")),
+                  ),
+                ],
               ),
-              //singup button
-              SizedBox(
-                height: mediaHeight * 0.06,
-                width: mediaWidth * 0.67,
-                child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                        shape: StadiumBorder(),
-                        backgroundColor: Color(0xff7FD958)),
-                    onPressed: () async {
-                      if (authController.bloodType == '') {
-                        authController.bloodTypeError.value = true;
-                      } else {
-                        authController.bloodTypeError.value = false;
-                      }
-                      if (authController.genderType == '') {
-                        authController.genderTypeError.value = true;
-                      } else {
-                        authController.genderTypeError.value = false;
-                      }
-                      //authController.registerWithEmailAndPassword();
-                      // qrCodeDialogBox();
-                      // authController.bytes =
-                      //     await authController.controller.capture();
-                      // print(authController.bytes);
-                      // Get.offAll(LoginOrSignup());
-                    },
-                    child: Text("SIGN UP")),
-              ),
-            ],
-          ),
+            ),
+          )),
         ),
-      )),
+      ),
     );
   }
 

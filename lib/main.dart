@@ -1,4 +1,5 @@
 import 'package:be_well/account/view/account.dart';
+import 'package:be_well/auth/controller/auth_controller.dart';
 import 'package:be_well/auth/view/login.dart';
 import 'package:be_well/auth/view/signup.dart';
 import 'package:be_well/auth/view/signup_continued.dart';
@@ -22,6 +23,7 @@ import 'package:get/get.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -38,12 +40,13 @@ Future<void> main() async {
   await Hive.openBox<SleepReminderModel>('SleepReminder');
   await Hive.openBox<MedicineReminderModel>('MedicineReminder');
 
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  MyApp({super.key});
 
+  AuthController authController = Get.put(AuthController());
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -51,7 +54,32 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MedicineReminder(),
+      home: FutureBuilder(
+          future: authController.checkUserLoggedIn(),
+          builder: (ctx, snapshot) {
+            if (snapshot.connectionState == ConnectionState.done) {
+              if (snapshot.hasError) {
+                return Center(
+                  child: Text(
+                    '${snapshot.error} occurred',
+                    style: TextStyle(fontSize: 18),
+                  ),
+                );
+              } else if (snapshot.hasData) {
+                // Extracting data from snapshot object
+                final data = snapshot.data as bool;
+                print('data is $data');
+                if (data) {
+                  return MyHomePage();
+                } else {
+                  return LoginOrSignup();
+                }
+              } else {
+                return Center(child: CircularProgressIndicator());
+              }
+            }
+            return Center(child: CircularProgressIndicator());
+          }),
     );
   }
 }

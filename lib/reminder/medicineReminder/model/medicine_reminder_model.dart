@@ -18,15 +18,19 @@ class MedicineReminderModel {
   late String medicineName;
   @HiveField(6)
   late String medicineDate;
+  @HiveField(7)
+  late String reminderId;
 
-  MedicineReminderModel(
-      {required this.notificaitonId,
-      required this.hour,
-      required this.min,
-      required this.zone,
-      required this.scheduleSeconds,
-      required this.medicineName,
-      required this.medicineDate});
+  MedicineReminderModel({
+    required this.notificaitonId,
+    required this.hour,
+    required this.min,
+    required this.zone,
+    required this.scheduleSeconds,
+    required this.medicineName,
+    required this.medicineDate,
+    required this.reminderId,
+  });
 
   MedicineReminderModel.empty() {
     notificaitonId = '';
@@ -34,5 +38,6 @@ class MedicineReminderModel {
     min = '';
     zone = '';
     scheduleSeconds = '';
+    reminderId = '';
   }
 }

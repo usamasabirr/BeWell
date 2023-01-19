@@ -1,4 +1,5 @@
 import 'package:be_well/auth/controller/auth_controller.dart';
+import 'package:be_well/myhomepage/view/myHomePage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -149,11 +150,14 @@ class _LoginState extends State<Login> {
                                               shape: StadiumBorder(),
                                               backgroundColor:
                                                   Color(0xff7FD958)),
-                                          onPressed: () {
+                                          onPressed: () async {
                                             if (_formKey.currentState!
                                                 .validate()) {
-                                              authController
+                                              var check = await authController
                                                   .logInWithEmailAndPassword();
+                                              if (check) {
+                                                Get.to(MyHomePage());
+                                              }
                                             }
                                           },
                                           child: Text("LOGIN")),

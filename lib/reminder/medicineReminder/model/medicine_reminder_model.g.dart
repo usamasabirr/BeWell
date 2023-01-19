@@ -24,13 +24,14 @@ class MedicineReminderModelAdapter extends TypeAdapter<MedicineReminderModel> {
       scheduleSeconds: fields[4] as String,
       medicineName: fields[5] as String,
       medicineDate: fields[6] as String,
+      reminderId: fields[7] as String,
     );
   }
 
   @override
   void write(BinaryWriter writer, MedicineReminderModel obj) {
     writer
-      ..writeByte(7)
+      ..writeByte(8)
       ..writeByte(0)
       ..write(obj.notificaitonId)
       ..writeByte(1)
@@ -44,7 +45,9 @@ class MedicineReminderModelAdapter extends TypeAdapter<MedicineReminderModel> {
       ..writeByte(5)
       ..write(obj.medicineName)
       ..writeByte(6)
-      ..write(obj.medicineDate);
+      ..write(obj.medicineDate)
+      ..writeByte(7)
+      ..write(obj.reminderId);
   }
 
   @override

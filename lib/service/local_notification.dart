@@ -46,4 +46,8 @@ class LocalNotificationService {
         uiLocalNotificationDateInterpretation:
             UILocalNotificationDateInterpretation.absoluteTime);
   }
+
+  Future<void> cancelScheduledNotification(id) async {
+    await _localNotificationService.cancel(id);
+  }
 }
