@@ -25,6 +25,8 @@ class SleepReminderController extends GetxController {
   final LocalNotificationService service = LocalNotificationService();
 
   TimeOfDay? selectedTime = null;
+  LocalNotificationService localNotificationService =
+      LocalNotificationService();
 
   var sleepReminderBox = Hive.box<SleepReminderModel>('SleepReminder');
   TextEditingController hourController = TextEditingController();
@@ -50,6 +52,12 @@ class SleepReminderController extends GetxController {
     } else {
       selectedWakeZone.value = 'A M';
     }
+  }
+
+  deleteReminder() async {
+    await localNotificationService.cancelScheduledNotification(0);
+    await sleepReminderBox.delete(0);
+    sleepReminder.value = SleepReminderModel.empty();
   }
 
   calculateScheduleTime() async {

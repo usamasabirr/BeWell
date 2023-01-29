@@ -1,4 +1,6 @@
 import 'package:be_well/myhomepage/controller.dart/myhomepage_controller.dart';
+import 'package:be_well/period/view/period.dart';
+import 'package:be_well/reminder/reminderHome.dart';
 import 'package:be_well/sleep/view/sleep.dart';
 import 'package:be_well/sleep/view/weekly_sleep_monitor.dart';
 import 'package:flutter/material.dart';
@@ -126,16 +128,21 @@ class _HomeState extends State<Home> {
                     Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Container(
-                            height: mediaWidth * 0.2,
-                            width: mediaWidth * 0.2,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color: Colors.green,
-                            ),
-                            child: Image.asset(
-                              'assets/images/period.png',
-                              fit: BoxFit.fill,
+                          InkWell(
+                            onTap: () {
+                              Get.to(Period());
+                            },
+                            child: Container(
+                              height: mediaWidth * 0.2,
+                              width: mediaWidth * 0.2,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: Colors.green,
+                              ),
+                              child: Image.asset(
+                                'assets/images/period.png',
+                                fit: BoxFit.fill,
+                              ),
                             ),
                           ),
                           SizedBox(
@@ -206,16 +213,21 @@ class _HomeState extends State<Home> {
                           SizedBox(
                             height: 20,
                           ),
-                          Container(
-                            height: mediaWidth * 0.3,
-                            width: mediaWidth * 0.3,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color: Colors.blue[900],
-                            ),
-                            child: Image.asset(
-                              'assets/images/reminder.png',
-                              fit: BoxFit.fill,
+                          InkWell(
+                            onTap: () {
+                              Get.to(ReminderHome());
+                            },
+                            child: Container(
+                              height: mediaWidth * 0.3,
+                              width: mediaWidth * 0.3,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: Colors.blue[900],
+                              ),
+                              child: Image.asset(
+                                'assets/images/reminder.png',
+                                fit: BoxFit.fill,
+                              ),
                             ),
                           ),
                           SizedBox(

@@ -44,7 +44,11 @@ class _MedicineReminderState extends State<MedicineReminder> {
             height: mediaHeight * 0.1,
             width: mediaWidth,
             child: Row(children: [
-              Icon(Icons.arrow_back),
+              InkWell(
+                  onTap: () {
+                    Get.back();
+                  },
+                  child: Icon(Icons.arrow_back)),
               Expanded(
                 child: SizedBox(),
               ),
@@ -363,7 +367,7 @@ class _MedicineReminderState extends State<MedicineReminder> {
     final DateTime? picked = await showDatePicker(
         context: context,
         initialDate: selectedDate,
-        firstDate: DateTime(2015, 8),
+        firstDate: DateTime.now(),
         lastDate: DateTime(2101));
     if (picked != null && picked != selectedDate) {
       setState(() {

@@ -233,6 +233,12 @@ class _SleepState extends State<Sleep> {
                     shape: StadiumBorder(), backgroundColor: Color(0xff7FD958)),
                 onPressed: () {
                   sleepController.calculateSleepTime();
+                  Get.defaultDialog(
+                      title: 'Success',
+                      middleText:
+                          'Saved time is ${sleepController.result} hours',
+                      titleStyle: TextStyle(
+                          color: Colors.green, fontWeight: FontWeight.bold));
                 },
                 child: Text("Save")),
           ),

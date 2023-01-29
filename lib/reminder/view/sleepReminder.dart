@@ -46,7 +46,11 @@ class _SleepReminderState extends State<SleepReminder> {
                 height: mediaHeight * 0.1,
                 width: mediaWidth,
                 child: Row(children: [
-                  Icon(Icons.arrow_back),
+                  InkWell(
+                      onTap: () {
+                        Get.back();
+                      },
+                      child: Icon(Icons.arrow_back)),
                   Expanded(
                     child: SizedBox(),
                   ),
@@ -282,7 +286,11 @@ class _SleepReminderState extends State<SleepReminder> {
                             ],
                           ),
                         ),
-                        Icon(Icons.delete)
+                        InkWell(
+                            onTap: () {
+                              sleepReminderController.deleteReminder();
+                            },
+                            child: Icon(Icons.delete))
                       ],
                     )
                   : SizedBox()),

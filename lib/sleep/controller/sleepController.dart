@@ -14,7 +14,7 @@ class ChartData {
 class SleepController extends GetxController {
   var sleepMonitorBox = Hive.box<SleepMonitorModel>('SleepMonitor');
   late List<ChartData> data = [];
-
+  double result = 0;
   //sleep Time
   Rx<int> sleepHour = 0.obs;
   Rx<int> sleepMin = 0.obs;
@@ -53,6 +53,12 @@ class SleepController extends GetxController {
     selectedWakeHour.value = 6;
     selectedWakeMin.value = 00;
 
+    defaultSleepHour = 6;
+    defaultSleepMin = 0;
+
+    defaultWakeHour = 6;
+    defaultWakeMin = 0;
+
     if (sleepHour.value ~/ 12 == 1) {
       selectedSleepZone.value = 'P M';
       selectedWakeZone.value = 'P M';
@@ -77,12 +83,7 @@ class SleepController extends GetxController {
     } else {
       int remHour = 24 - defaultSleepHour;
       remHour += defaultWakeHour;
-      // if (remHour < 0) {
-      //   remHour -= 24;
-      // } else {
-      //   int temp = 24 - defaultSleepHour;
-      //   remHour += temp;
-      // }
+
       totalRemMin = remHour * 60;
       int remMin = (defaultWakeMin - defaultSleepMin).abs();
       if (defaultWakeMin > defaultSleepMin) {
@@ -93,13 +94,8 @@ class SleepController extends GetxController {
     }
     print('total $totalRemMin');
 
-    double result = totalRemMin / 60;
+    result = totalRemMin / 60;
 
-    // int sleepHour = (defaultWakeHour - defaultSleepHour).abs();
-    // int sleepHourInMin = sleepHour * 60;
-    // int sleepMin = (defaultWakeMin - defaultSleepMin).abs();
-    // double value = sleepHour + sleepMin / 100;
-    // print('value is $value');
     DateTime date = DateTime.now();
     String currentDay = DateFormat('EEEE').format(date);
     print('currentDay is $currentDay');
@@ -110,12 +106,6 @@ class SleepController extends GetxController {
 
     sleepMonitorBox.put(0, temp);
     SleepMonitorModel temp1 = sleepMonitorBox.get(0) as SleepMonitorModel;
-    print('get Value is ${temp1.weekDay}');
-
-    //print(DateFormat('EEEE').format(date));
-
-    print('sleep hour is $sleepHour');
-    print('sleep min is $sleepMin');
   }
 
   getSleepData() {

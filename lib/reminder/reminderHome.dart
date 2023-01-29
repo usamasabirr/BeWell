@@ -1,3 +1,5 @@
+import 'package:be_well/reminder/medicineReminder/view/medicine_reminder.dart';
+import 'package:be_well/reminder/view/sleepReminder.dart';
 import 'package:be_well/sleep/controller/sleepController.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
@@ -27,12 +29,16 @@ class _ReminderHomeState extends State<ReminderHome> {
             height: mediaHeight * 0.1,
             width: mediaWidth,
             child: Row(children: [
-              Icon(Icons.arrow_back),
+              InkWell(
+                  onTap: () {
+                    Get.back();
+                  },
+                  child: Icon(Icons.arrow_back)),
               Expanded(
                 child: SizedBox(),
               ),
               Text(
-                'Sleep Reminder',
+                'Reminder',
                 style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
               ),
               Expanded(
@@ -41,79 +47,67 @@ class _ReminderHomeState extends State<ReminderHome> {
               Opacity(opacity: 0.0, child: Icon(Icons.arrow_back))
             ]),
           ),
-
-          //Bed Time
-          SizedBox(
-            height: 50,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Image.asset(
-                'assets/images/sleepHour.png',
-                height: 40,
-              ),
-              SizedBox(
-                width: 10,
-              ),
-              Text('How many hours do you want to sleep?',
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold))
-            ],
-          ),
+          //Text
           SizedBox(
             height: 10,
           ),
+          Text(
+            'Which Reminder',
+            style: TextStyle(fontSize: 22, fontWeight: FontWeight.w400),
+          ),
+          Text('would you like to choose',
+              style: TextStyle(fontSize: 22, fontWeight: FontWeight.w400)),
 
-          InkWell(
-            onTap: () {
-              // showCustomTimePicker(
-              //     context: context,
-              //     // It is a must if you provide selectableTimePredicate
-              //     onFailValidation: (context) => print('Unavailable selection'),
-              //     initialTime: TimeOfDay(
-              //         hour: sleepController.sleepHour.value,
-              //         minute: sleepController.sleepMin.value),
-              //     selectableTimePredicate: (p0) => true).then((value) {
-              //   sleepController.selectedSleepHour.value = value!.hour % 12;
-              //   sleepController.selectedSleepMin.value = value.minute;
+          //Sleep
+          SizedBox(
+            height: mediaHeight * 0.1,
+          ),
+          SizedBox(
+            height: mediaHeight * 0.06,
+            width: mediaWidth * 0.67,
+            child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                    shape: StadiumBorder(), backgroundColor: Color(0xff7FD958)),
+                onPressed: () {
+                  Get.to(SleepReminder());
+                },
+                child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Image.asset(
+                        'assets/images/bedTime.png',
+                        height: 40,
+                        width: 40,
+                        fit: BoxFit.fill,
+                      ),
+                      Text("Sleep")
+                    ])),
+          ),
 
-              //   sleepController.defaultSleepHour = value.hour;
-              //   sleepController.defaultSleepMin = value.minute;
-              //   print('value is ${value.hour}');
-              //   if (value.hour ~/ 12 == 1) {
-              //     sleepController.selectedSleepZone.value = 'P M';
-              //   } else {
-              //     sleepController.selectedSleepZone.value = 'A M';
-              //   }
-              // });
-            },
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                    decoration: BoxDecoration(
-                        color: Colors.blue[100], border: Border.all()),
-                    height: 50,
-                    width: 100,
-                    child: Center(child: TextField())),
-                SizedBox(
-                  width: 10,
-                ),
-                Container(
-                  decoration: BoxDecoration(
-                      color: Colors.blue[100], border: Border.all()),
-                  height: 50,
-                  width: 100,
-                  child: Center(
-                    child: Text(
-                      "${0}",
-                      style: TextStyle(fontSize: 16),
-                    ),
-                  ),
-                ),
-              ],
-            ),
+          //Medication
+          SizedBox(
+            height: mediaHeight * 0.1,
+          ),
+          SizedBox(
+            height: mediaHeight * 0.06,
+            width: mediaWidth * 0.67,
+            child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                    shape: StadiumBorder(), backgroundColor: Color(0xff7FD958)),
+                onPressed: () {
+                  Get.to((MedicineReminder()));
+                },
+                child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Image.asset(
+                        'assets/images/medicine.png',
+                        height: 40,
+                        width: 40,
+                        fit: BoxFit.fill,
+                      ),
+                      Text("Medication")
+                    ])),
           ),
         ],
       )),

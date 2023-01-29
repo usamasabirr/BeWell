@@ -52,7 +52,7 @@ class MedicineReminderController extends GetxController {
   saveReminder() async {
     int reminderDuration = getReminderDuration();
     if (reminderDuration == -1) {
-      showDialog('Error', 'assets/images/errorCross.png', 'Cannot save alram,',
+      showDialog('Error', 'assets/images/errorCross.png', 'Cannot save alram',
           'error');
     } else {
       MedicineReminderModel medicineReminderModel =
@@ -187,7 +187,9 @@ class MedicineReminderController extends GetxController {
       title: title,
       middleText: 'reminder has been saved',
       titleStyle: TextStyle(
-          color: Colors.green, fontSize: 22, fontWeight: FontWeight.bold),
+          color: type == "error" ? Colors.red : Colors.green,
+          fontSize: 22,
+          fontWeight: FontWeight.bold),
       content: Column(
         children: [
           Row(
@@ -206,7 +208,8 @@ class MedicineReminderController extends GetxController {
             height: 10,
           ),
           ElevatedButton(
-              style: ElevatedButton.styleFrom(primary: Colors.green),
+              style: ElevatedButton.styleFrom(
+                  primary: type == "error" ? Colors.red : Colors.green),
               onPressed: () {
                 Get.back();
               },

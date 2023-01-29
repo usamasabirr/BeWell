@@ -7,6 +7,8 @@ import 'package:be_well/auth/view/login_or_signup.dart';
 import 'package:be_well/home/controller/home_controller.dart';
 import 'package:be_well/home/view/home.dart';
 import 'package:be_well/myhomepage/view/myHomePage.dart';
+import 'package:be_well/period/model/period_model.dart';
+import 'package:be_well/period/view/period.dart';
 import 'package:be_well/qrcode/view/qr_info_image.dart';
 import 'package:be_well/qrcode/view/qrcode.dart';
 import 'package:be_well/reminder/medicineReminder/model/medicine_reminder_model.dart';
@@ -35,10 +37,12 @@ Future<void> main() async {
   Hive.registerAdapter(SleepMonitorModelAdapter());
   Hive.registerAdapter(SleepReminderModelAdapter());
   Hive.registerAdapter(MedicineReminderModelAdapter());
+  Hive.registerAdapter(PeriodModelAdapter());
 
   await Hive.openBox<SleepMonitorModel>('SleepMonitor');
   await Hive.openBox<SleepReminderModel>('SleepReminder');
   await Hive.openBox<MedicineReminderModel>('MedicineReminder');
+  await Hive.openBox<PeriodModel>('Period');
 
   runApp(MyApp());
 }
