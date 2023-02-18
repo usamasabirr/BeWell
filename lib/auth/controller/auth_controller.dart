@@ -43,6 +43,9 @@ class AuthController extends GetxController {
   TextEditingController doctorNumberController = TextEditingController();
   TextEditingController doctorNameController = TextEditingController();
 
+  //forgot password
+  TextEditingController forgotEmailTextEditingController =
+      TextEditingController();
   Future<bool> registerWithEmailAndPassword() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     loading.value = true;
@@ -145,5 +148,45 @@ class AuthController extends GetxController {
       return false;
     }
     return true;
+  }
+
+  String? validateMobile(String value) {
+    String pattern = r'(^(?:[+0]9)?[0-9]{10,12}$)';
+    RegExp regExp = new RegExp(pattern);
+    if (value.length == 0) {
+      return 'phone number is not valid';
+    } else if (!regExp.hasMatch(value)) {
+      return 'Please enter valid mobile number';
+    }
+    return null;
+  }
+
+  forgotPassword() async {
+    loading.value = true;
+    try {
+      await _auth.sendPasswordResetEmail(
+          email: forgotEmailTextEditingController.text);
+      Get.showSnackbar(
+        GetSnackBar(
+          title: 'Success',
+          message: 'Password reset link has been sent',
+          duration: const Duration(seconds: 2),
+          backgroundColor: Colors.green,
+        ),
+      );
+      forgotEmailTextEditingController.clear();
+    } catch (err) {
+      Get.showSnackbar(
+        GetSnackBar(
+          title: 'Error',
+          message: 'Entered hours not possible',
+          duration: const Duration(seconds: 2),
+          backgroundColor: Colors.red,
+        ),
+      );
+      loading.value = false;
+      print('err is $err');
+    }
+    loading.value = false;
   }
 }

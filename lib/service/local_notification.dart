@@ -35,12 +35,14 @@ class LocalNotificationService {
       required String body,
       required int seconds}) async {
     final details = await _notificationDetails();
+    var zone = tz.getLocation('Asia/Karachi');
     await _localNotificationService.zonedSchedule(
         id,
         title,
         body,
-        tz.TZDateTime.from(
-            DateTime.now().add(Duration(seconds: seconds)), tz.local),
+        // tz.TZDateTime.from(
+        //     DateTime.now().add(Duration(seconds: seconds)), zone),
+        tz.TZDateTime.now(tz.local).add(Duration(seconds: seconds)),
         details,
         androidAllowWhileIdle: true,
         uiLocalNotificationDateInterpretation:

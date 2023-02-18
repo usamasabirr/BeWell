@@ -168,7 +168,7 @@ class MedicineReminderController extends GetxController {
       int remMin = toDateMinute - fromDateMin;
       int remHour = resultDays - fromDateHours + toDateHours;
       int remHourToMin = remHour * 60;
-      int result = 0;
+      result = 0;
       if (remMin <= 0) {
         result = remHourToMin - remMin.abs();
       } else {

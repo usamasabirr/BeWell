@@ -20,6 +20,7 @@ class MyHomePageController extends GetxController {
         .get();
 
     temp.userInfoLink = '';
+
     temp.userId = response.docs[0]['userId'];
     temp.docId = response.docs[0]['docId'];
     temp.name = response.docs[0]['name'];

@@ -111,7 +111,7 @@ class SleepReminderController extends GetxController {
           }
           int remMin = (selectMin - currMin).abs();
           int remHourToMin = remHour * 60;
-          int totalRemMin = 0;
+          totalRemMin = 0;
 
           if (selectMin > currMin) {
             totalRemMin = remHourToMin + remMin;
@@ -131,7 +131,7 @@ class SleepReminderController extends GetxController {
         temp.scheduleSeconds = (totalRemMin * 60).toString();
 
         sleepReminderBox.put(0, temp);
-
+        print('time is ${totalRemMin * 60}');
         await service.showScheduleNotification(
             id: 0,
             title: 'Sleep Reminder',

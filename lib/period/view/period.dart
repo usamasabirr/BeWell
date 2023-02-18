@@ -74,6 +74,13 @@ class _PeriodState extends State<Period> {
                   ),
                 ),
               ),
+              Align(
+                alignment: Alignment.topLeft,
+                child: Text(
+                  'You need to enter the date of last day of your last period',
+                  style: TextStyle(fontSize: 12, color: Colors.grey),
+                ),
+              ),
               SizedBox(
                 height: 20,
               ),
@@ -118,6 +125,13 @@ class _PeriodState extends State<Period> {
                   style: TextStyle(
                     fontSize: 20,
                   ),
+                ),
+              ),
+              Align(
+                alignment: Alignment.topLeft,
+                child: Text(
+                  'You need to enter how many days between each period',
+                  style: TextStyle(fontSize: 12, color: Colors.grey),
                 ),
               ),
               SizedBox(

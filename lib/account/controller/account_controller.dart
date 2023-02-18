@@ -1,18 +1,19 @@
 import 'dart:typed_data';
 
+import 'package:be_well/auth/view/login_or_signup.dart';
 import 'package:be_well/myhomepage/controller.dart/myhomepage_controller.dart';
 import 'package:be_well/myhomepage/model/user.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dropdown_plus/dropdown_plus.dart';
+import 'package:firebase_auth/firebase_auth.dart' as FUser;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
-import 'package:widgets_to_image/widgets_to_image.dart';
 
 class AccountController extends GetxController {
   MyHomePageController myHomePageController = Get.find();
   FirebaseFirestore _firestore = FirebaseFirestore.instance;
   User previousData = User.empty();
+  Rx<bool> isLoading = false.obs;
 
   //edit
   TextEditingController nameController = TextEditingController();
@@ -93,6 +94,35 @@ class AccountController extends GetxController {
       ));
     } catch (err) {
       print('edit user infor error is $err');
+    }
+  }
+
+  deleteAccount() async {
+    isLoading.value = true;
+    String email = myHomePageController.userInfo.value.email;
+    String password = myHomePageController.userInfo.value.password;
+    String userId = myHomePageController.userInfo.value.userId;
+    print('emai is $email');
+    print('password is $password');
+    print(myHomePageController.userInfo.value);
+    try {
+      FUser.User user = await FUser.FirebaseAuth.instance.currentUser!;
+      FUser.AuthCredential credentials =
+          FUser.EmailAuthProvider.credential(email: email, password: password);
+
+      print(credentials.accessToken);
+      //print(user);
+      FUser.UserCredential result =
+          await user.reauthenticateWithCredential(credentials);
+      //await _firestore.collection('User').doc(userId).delete();
+      await result.user!.delete();
+      isLoading.value = false;
+      Get.offAll(LoginOrSignup());
+      return true;
+    } catch (e) {
+      isLoading.value = false;
+      print(e.toString());
+      return null;
     }
   }
 }

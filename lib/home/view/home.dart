@@ -3,6 +3,7 @@ import 'package:be_well/period/view/period.dart';
 import 'package:be_well/reminder/reminderHome.dart';
 import 'package:be_well/sleep/view/sleep.dart';
 import 'package:be_well/sleep/view/weekly_sleep_monitor.dart';
+import 'package:be_well/upload/upload_home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -178,16 +179,21 @@ class _HomeState extends State<Home> {
                     Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Container(
-                            height: mediaWidth * 0.2,
-                            width: mediaWidth * 0.2,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color: Colors.blue,
-                            ),
-                            child: Image.asset(
-                              'assets/images/upload.png',
-                              fit: BoxFit.fill,
+                          InkWell(
+                            onTap: () {
+                              Get.to(UploadHome());
+                            },
+                            child: Container(
+                              height: mediaWidth * 0.2,
+                              width: mediaWidth * 0.2,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: Colors.blue,
+                              ),
+                              child: Image.asset(
+                                'assets/images/upload.png',
+                                fit: BoxFit.fill,
+                              ),
                             ),
                           ),
                           SizedBox(

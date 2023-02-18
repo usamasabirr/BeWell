@@ -211,7 +211,7 @@ class _EditAccountContinuedState extends State<EditAccountContinued> {
                           height: 10,
                         ),
                         TextFormField(
-                          controller: accountController.doctorNameController,
+                          controller: accountController.doctorNumberController,
                           decoration: InputDecoration(
                               border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(10)),

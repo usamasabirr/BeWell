@@ -1,5 +1,6 @@
 import 'package:be_well/account/view/account.dart';
 import 'package:be_well/auth/controller/auth_controller.dart';
+import 'package:be_well/auth/view/forgot_password.dart';
 import 'package:be_well/auth/view/login.dart';
 import 'package:be_well/auth/view/signup.dart';
 import 'package:be_well/auth/view/signup_continued.dart';
@@ -19,6 +20,9 @@ import 'package:be_well/reminder/view/sleepReminder.dart';
 import 'package:be_well/sleep/model/sleepMonitor_model.dart';
 import 'package:be_well/sleep/view/sleep.dart';
 import 'package:be_well/sleep/view/weekly_sleep_monitor.dart';
+import 'package:be_well/upload/prescription/model/prescription_model.dart';
+import 'package:be_well/upload/prescription/view/prescription.dart';
+import 'package:be_well/upload/upload_home.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -38,11 +42,13 @@ Future<void> main() async {
   Hive.registerAdapter(SleepReminderModelAdapter());
   Hive.registerAdapter(MedicineReminderModelAdapter());
   Hive.registerAdapter(PeriodModelAdapter());
+  Hive.registerAdapter(PrescriptionModelAdapter());
 
   await Hive.openBox<SleepMonitorModel>('SleepMonitor');
   await Hive.openBox<SleepReminderModel>('SleepReminder');
   await Hive.openBox<MedicineReminderModel>('MedicineReminder');
   await Hive.openBox<PeriodModel>('Period');
+  await Hive.openBox<PrescriptionModel>('Prescription');
 
   runApp(MyApp());
 }
@@ -52,9 +58,11 @@ class MyApp extends StatelessWidget {
 
   AuthController authController = Get.put(AuthController());
   // This widget is the root of your application.
+
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      supportedLocales: <Locale>[Locale('en', 'US'), Locale('zh', 'CN')],
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),

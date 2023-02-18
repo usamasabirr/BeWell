@@ -364,6 +364,7 @@ class _AccountState extends State<Account> {
                             shape: StadiumBorder(),
                             backgroundColor: Color(0xff7FD958)),
                         onPressed: () {
+                          accountController.deleteAccount();
                           //qrCodeController.generateQrCode();
                         },
                         child: Text("Delete Acount")),

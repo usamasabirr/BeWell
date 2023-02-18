@@ -1,4 +1,5 @@
 import 'package:be_well/auth/controller/auth_controller.dart';
+import 'package:be_well/auth/view/forgot_password.dart';
 import 'package:be_well/myhomepage/view/myHomePage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
@@ -127,15 +128,20 @@ class _LoginState extends State<Login> {
                                       height: mediaHeight * 0.05,
                                     ),
                                     //Forgot your password
-                                    Align(
-                                      alignment: Alignment.topLeft,
-                                      child: Text(
-                                        "Forgot your password?",
-                                        style: TextStyle(
-                                            fontSize: 15,
-                                            decoration:
-                                                TextDecoration.underline,
-                                            color: Colors.blue),
+                                    InkWell(
+                                      onTap: () {
+                                        Get.to(ForgotPassword());
+                                      },
+                                      child: Align(
+                                        alignment: Alignment.topLeft,
+                                        child: Text(
+                                          "Forgot your password?",
+                                          style: TextStyle(
+                                              fontSize: 15,
+                                              decoration:
+                                                  TextDecoration.underline,
+                                              color: Colors.blue),
+                                        ),
                                       ),
                                     ),
                                     SizedBox(

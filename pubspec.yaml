@@ -54,6 +54,11 @@ dependencies:
   timezone: ^0.9.1
   uuid: ^3.0.7
   shared_preferences: ^2.0.16
+  file_picker: ^5.2.5
+  flutter_file_view: ^2.2.0+1
+  url_launcher: ^6.1.9
+  open_filex: ^4.3.2
+  
 
   firebase_core: ^1.10.6
   firebase_database: ^9.0.4
