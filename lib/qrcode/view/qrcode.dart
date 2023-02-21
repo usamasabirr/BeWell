@@ -20,14 +20,12 @@ class _QrCodeState extends State<QrCode> {
   MyHomePageController myHomePageController = Get.find();
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     qrCodeController.checkIfQrCode();
   }
 
   @override
   void dispose() {
-    // TODO: implement dispose
     Get.delete();
     super.dispose();
   }

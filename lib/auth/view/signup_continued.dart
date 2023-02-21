@@ -92,6 +92,8 @@ class _SignupContinuedState extends State<SignupContinued> {
                                   height: 10,
                                 ),
                                 TextDropdownFormField(
+                                  controller:
+                                      authController.dropdownEditingController1,
                                   options: [
                                     "A+",
                                     "B+",
@@ -104,7 +106,10 @@ class _SignupContinuedState extends State<SignupContinued> {
                                   ],
                                   onChanged: (dynamic item) {
                                     //print('item is $item');
+
                                     authController.bloodType = item.toString();
+                                    authController.dropdownEditingController1
+                                        .value = item.toString();
                                   },
                                   decoration: InputDecoration(
                                       border: OutlineInputBorder(
@@ -179,10 +184,14 @@ class _SignupContinuedState extends State<SignupContinued> {
                                   height: 10,
                                 ),
                                 TextDropdownFormField(
+                                  controller:
+                                      authController.dropdownEditingController2,
                                   options: ["Male", "Female"],
                                   onChanged: (dynamic item) {
                                     print('item is $item');
                                     authController.genderType = item.toString();
+                                    authController.dropdownEditingController2
+                                        .value = item.toString();
                                   },
                                   decoration: InputDecoration(
                                       border: OutlineInputBorder(
@@ -222,7 +231,7 @@ class _SignupContinuedState extends State<SignupContinued> {
                                     RegExp regExp = new RegExp(pattern);
                                     if (value!.length > 0) {
                                       if (!regExp.hasMatch(value)) {
-                                        return 'Please enter valid mobile number +966 XXX XXXXXXX';
+                                        return 'Please enter valid mobile number +966 XXX XXXXXX';
                                       }
                                     }
                                   },
@@ -286,7 +295,7 @@ class _SignupContinuedState extends State<SignupContinued> {
                                     RegExp regExp = new RegExp(pattern);
                                     if (value!.length > 0) {
                                       if (!regExp.hasMatch(value)) {
-                                        return 'Please enter valid mobile number +966 XXX XXXXXXX';
+                                        return 'Please enter valid mobile number +966 XXX XXXXXX';
                                       }
                                     }
                                   },

@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dropdown_plus/dropdown_plus.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -30,6 +31,10 @@ class AuthController extends GetxController {
   TextEditingController dateController = TextEditingController();
 
   //sign up continued
+  DropdownEditingController<String> dropdownEditingController1 =
+      DropdownEditingController();
+  DropdownEditingController<String> dropdownEditingController2 =
+      DropdownEditingController();
   String bloodType = '';
   Rx<bool> bloodTypeError = false.obs;
   String genderType = '';

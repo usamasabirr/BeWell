@@ -87,6 +87,7 @@ class MedicineReminderController extends GetxController {
   }
 
   resetDate() {
+    print('inside');
     setCurrentTime();
     medicineNameController.clear();
   }

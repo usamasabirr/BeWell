@@ -271,11 +271,7 @@ class _MedicineReminderState extends State<MedicineReminder> {
                         shape: StadiumBorder(),
                         backgroundColor: Color(0xff7FD958)),
                     onPressed: () {
-                      // if (_formKey.currentState!.validate()) {
-                      //   authController.logInWithEmailAndPassword();
-                      // }
-                      medicineReminderController.getSavedReminders();
-                      // medicineReminderController.medicineReminderBox.clear();
+                      medicineReminderController.resetDate();
                     },
                     child: Text("Cancel")),
               ),

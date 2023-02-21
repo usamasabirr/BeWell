@@ -1,6 +1,7 @@
 import 'package:be_well/reminder/controller/sleepreminder_controller.dart';
 import 'package:be_well/service/local_notification.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
@@ -98,7 +99,11 @@ class _SleepReminderState extends State<SleepReminder> {
                       width: 100,
                       child: Center(
                           child: TextField(
+                        keyboardType: TextInputType.number,
                         controller: sleepReminderController.hourController,
+                        inputFormatters: [
+                          FilteringTextInputFormatter.digitsOnly
+                        ],
                         decoration:
                             InputDecoration(border: OutlineInputBorder()),
                       ))),

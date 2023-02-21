@@ -187,7 +187,12 @@ class PrescriptionTile extends StatelessWidget {
                   ),
                 ],
               ),
-            )
+            ),
+            InkWell(
+                onTap: () {
+                  prescriptionController.deleteSavedPrescription(index);
+                },
+                child: Icon(Icons.delete))
           ]),
           Divider(
             color: Colors.grey,

@@ -25,14 +25,15 @@ class PrescriptionController extends GetxController {
       String name = file.path.split('/').last;
       String extension = file.path.split('.').last;
       var copied = await file.copy(appDocPath + '/${name}');
+      var uuid = Uuid();
+      var key = uuid.v1();
       PrescriptionModel prescription = PrescriptionModel(
-          name: name, path: copied.path, extension: extension);
+          name: name, path: copied.path, extension: extension, id: key);
       print('fileName is $name');
       print('extension is $extension');
 
       //save prescription
-      var uuid = Uuid();
-      var key = uuid.v1();
+
       await prescriptionBox.put(key, prescription);
       savedPrescriptions.add(prescription);
       // print('original file path is ${file.path}');
@@ -40,6 +41,14 @@ class PrescriptionController extends GetxController {
     } else {
       // User canceled the picker
     }
+  }
+
+  deleteSavedPrescription(int index) async {
+    print('inside');
+    //prescriptionBox.clear();
+    await prescriptionBox.delete(savedPrescriptions[index].id).then((value) {
+      savedPrescriptions.remove(savedPrescriptions[index]);
+    });
   }
 
   getFiles() async {

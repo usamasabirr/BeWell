@@ -10,13 +10,19 @@ class PrescriptionModel {
   late String path;
   @HiveField(2)
   late String extension;
+  @HiveField(3)
+  late String id;
 
   PrescriptionModel(
-      {required this.name, required this.path, required this.extension});
+      {required this.name,
+      required this.path,
+      required this.extension,
+      required this.id});
 
   PrescriptionModel.empty() {
     name = '';
     path = '';
     extension = '';
+    id = '';
   }
 }

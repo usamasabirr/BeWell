@@ -17,7 +17,9 @@ class Signup extends StatefulWidget {
 
 class _SignupState extends State<Signup> {
   final _formKey = GlobalKey<FormState>();
-  AuthController authController = Get.put(AuthController());
+  AuthController authController = Get.put(
+    AuthController(),
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -156,6 +158,8 @@ class _SignupState extends State<Signup> {
                                   validator: (value) {
                                     if (value == null || value.isEmpty) {
                                       return '* Please enter password';
+                                    } else if (value.length < 8) {
+                                      return '* Password should be 8 characters long';
                                     }
                                     return null;
                                   },

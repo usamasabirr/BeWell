@@ -1,5 +1,6 @@
 import 'package:be_well/period/controller/period_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
@@ -144,6 +145,7 @@ class _PeriodState extends State<Period> {
                   padding: EdgeInsets.only(left: 5),
                   width: mediaWidth / 3 + 20,
                   child: TextFormField(
+                    inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                     controller: periodController.cycleDurationController,
                     decoration: InputDecoration(
                         prefixIcon: Icon(Icons.access_time),
