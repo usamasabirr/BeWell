@@ -1,3 +1,4 @@
+import 'package:be_well/faq/faq_home.dart';
 import 'package:be_well/myhomepage/controller.dart/myhomepage_controller.dart';
 import 'package:be_well/period/view/period.dart';
 import 'package:be_well/reminder/reminderHome.dart';
@@ -68,9 +69,14 @@ class _HomeState extends State<Home> {
                   Expanded(
                     child: SizedBox(),
                   ),
-                  Image.asset(
-                    'assets/images/union.png',
-                    height: mediaHeight * 0.04,
+                  InkWell(
+                    onTap: () {
+                      Get.to(FaqHome());
+                    },
+                    child: Image.asset(
+                      'assets/images/union.png',
+                      height: mediaHeight * 0.04,
+                    ),
                   ),
                 ],
               ),
