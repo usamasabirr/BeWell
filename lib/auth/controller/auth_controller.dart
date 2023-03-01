@@ -184,7 +184,7 @@ class AuthController extends GetxController {
       Get.showSnackbar(
         GetSnackBar(
           title: 'Error',
-          message: 'Entered hours not possible',
+          message: 'Error Occured',
           duration: const Duration(seconds: 2),
           backgroundColor: Colors.red,
         ),

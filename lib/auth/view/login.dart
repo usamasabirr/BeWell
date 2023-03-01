@@ -52,6 +52,19 @@ class _LoginState extends State<Login> {
                     ),
                   ),
                 ),
+                Positioned(
+                  top: 30,
+                  left: 20,
+                  child: InkWell(
+                    onTap: () {
+                      Get.back();
+                    },
+                    child: Icon(
+                      Icons.arrow_back,
+                      color: Colors.black,
+                    ),
+                  ),
+                ),
 
                 //Login
                 Positioned(
@@ -94,7 +107,7 @@ class _LoginState extends State<Login> {
                                           border: OutlineInputBorder(
                                               borderRadius:
                                                   BorderRadius.circular(10)),
-                                          label: Text('email'),
+                                          label: Text('Email'),
                                           hintText: "Enter email"),
                                       validator: (value) {
                                         if (value == null || value.isEmpty) {
@@ -115,7 +128,7 @@ class _LoginState extends State<Login> {
                                           border: OutlineInputBorder(
                                               borderRadius:
                                                   BorderRadius.circular(10)),
-                                          label: Text('password'),
+                                          label: Text('Password'),
                                           hintText: "Enter password"),
                                       validator: (value) {
                                         if (value == null || value.isEmpty) {

@@ -52,6 +52,19 @@ class _SignupState extends State<Signup> {
                 ),
               ),
             ),
+            Positioned(
+              top: 30,
+              left: 20,
+              child: InkWell(
+                onTap: () {
+                  Get.back();
+                },
+                child: Icon(
+                  Icons.arrow_back,
+                  color: Colors.black,
+                ),
+              ),
+            ),
 
             //Signup
             Positioned(
@@ -254,6 +267,7 @@ class _SignupState extends State<Signup> {
                             shape: StadiumBorder(),
                             backgroundColor: Color(0xff7FD958)),
                         onPressed: () {
+                          //TODO uncomment if
                           if (_formKey.currentState!.validate()) {
                             Get.to(SignupContinued());
                           }

@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:be_well/upload/document/controller/document_controller.dart';
 import 'package:be_well/upload/prescription/controller/prescription_controller.dart';
 import 'package:be_well/upload/prescription/view/file_view_page.dart';
 import 'package:flutter/material.dart';
@@ -10,17 +11,16 @@ import 'package:get/get.dart';
 import 'package:open_filex/open_filex.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class Prescription extends StatefulWidget {
-  const Prescription({super.key});
+class MyDocument extends StatefulWidget {
+  const MyDocument({super.key});
 
   @override
-  State<Prescription> createState() => _PrescriptionState();
+  State<MyDocument> createState() => _PrescriptionState();
 }
 
-class _PrescriptionState extends State<Prescription> {
+class _PrescriptionState extends State<MyDocument> {
   FileViewController? fileViewController;
-  PrescriptionController prescriptionController =
-      Get.put(PrescriptionController());
+  DocumentController prescriptionController = Get.put(DocumentController());
 
   @override
   void initState() {
@@ -58,7 +58,7 @@ class _PrescriptionState extends State<Prescription> {
               child: SizedBox(),
             ),
             Text(
-              'Prescription',
+              'MyDocument',
               style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
             ),
             Expanded(
@@ -103,7 +103,7 @@ class PrescriptionTile extends StatelessWidget {
 
   final double mediaHeight;
   final double mediaWidth;
-  final PrescriptionController prescriptionController;
+  final DocumentController prescriptionController;
   var fileViewController;
   final int index;
 

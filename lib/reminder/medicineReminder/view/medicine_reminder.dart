@@ -243,7 +243,7 @@ class _MedicineReminderState extends State<MedicineReminder> {
 
           //Save or cancel
           SizedBox(
-            height: mediaHeight * 0.05,
+            height: mediaHeight * 0.02,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,

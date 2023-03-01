@@ -118,10 +118,22 @@ class AccountController extends GetxController {
       await result.user!.delete();
       isLoading.value = false;
       Get.offAll(LoginOrSignup());
+      Get.showSnackbar(GetSnackBar(
+        duration: Duration(seconds: 3),
+        backgroundColor: Colors.green,
+        title: 'Success',
+        message: 'account deleted successfully',
+      ));
       return true;
     } catch (e) {
       isLoading.value = false;
       print(e.toString());
+      Get.showSnackbar(GetSnackBar(
+        duration: Duration(seconds: 3),
+        backgroundColor: Colors.red,
+        title: 'Error',
+        message: 'unable to delete account',
+      ));
       return null;
     }
   }

@@ -161,6 +161,7 @@ class _SignupContinuedState extends State<SignupContinued> {
                                 ),
                                 TextFormField(
                                   controller: authController.weightController,
+                                  keyboardType: TextInputType.number,
                                   decoration: InputDecoration(
                                       border: OutlineInputBorder(
                                           borderRadius:
@@ -173,6 +174,7 @@ class _SignupContinuedState extends State<SignupContinued> {
                                 ),
                                 TextFormField(
                                   controller: authController.heightController,
+                                  keyboardType: TextInputType.number,
                                   decoration: InputDecoration(
                                       border: OutlineInputBorder(
                                           borderRadius:
@@ -223,6 +225,7 @@ class _SignupContinuedState extends State<SignupContinued> {
                                   height: 10,
                                 ),
                                 TextFormField(
+                                  keyboardType: TextInputType.number,
                                   controller:
                                       authController.familyNumberController,
                                   validator: (value) {
@@ -231,7 +234,7 @@ class _SignupContinuedState extends State<SignupContinued> {
                                     RegExp regExp = new RegExp(pattern);
                                     if (value!.length > 0) {
                                       if (!regExp.hasMatch(value)) {
-                                        return 'Please enter valid mobile number +966 XXX XXXXXX';
+                                        return 'Please enter valid mobile number +966 XX XXXXXXX';
                                       }
                                     }
                                   },
@@ -273,7 +276,7 @@ class _SignupContinuedState extends State<SignupContinued> {
                                               BorderRadius.circular(10)),
                                       label: Text('Doctor Number'),
                                       hintText: "(+966)"),
-                                  keyboardType: TextInputType.phone,
+                                  keyboardType: TextInputType.number,
                                   // onChanged: ((value) {
                                   //   if (value.length == 1) {
                                   //     authController.doctorNumberController
@@ -295,7 +298,7 @@ class _SignupContinuedState extends State<SignupContinued> {
                                     RegExp regExp = new RegExp(pattern);
                                     if (value!.length > 0) {
                                       if (!regExp.hasMatch(value)) {
-                                        return 'Please enter valid mobile number +966 XXX XXXXXX';
+                                        return 'Please enter valid mobile number +966 XX XXXXXXX';
                                       }
                                     }
                                   },

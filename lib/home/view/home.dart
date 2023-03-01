@@ -1,6 +1,7 @@
 import 'package:be_well/faq/faq_home.dart';
 import 'package:be_well/myhomepage/controller.dart/myhomepage_controller.dart';
 import 'package:be_well/period/view/period.dart';
+import 'package:be_well/qrcode/view/qrcode.dart';
 import 'package:be_well/reminder/reminderHome.dart';
 import 'package:be_well/sleep/view/sleep.dart';
 import 'package:be_well/sleep/view/weekly_sleep_monitor.dart';
@@ -250,16 +251,21 @@ class _HomeState extends State<Home> {
                     Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Container(
-                            height: mediaWidth * 0.5,
-                            width: mediaWidth * 0.5,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color: Colors.green,
-                            ),
-                            child: Image.asset(
-                              'assets/images/qrcode.png',
-                              fit: BoxFit.fill,
+                          InkWell(
+                            onTap: () {
+                              Get.to(QrCode());
+                            },
+                            child: Container(
+                              height: mediaWidth * 0.5,
+                              width: mediaWidth * 0.5,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: Colors.green,
+                              ),
+                              child: Image.asset(
+                                'assets/images/qrcode.png',
+                                fit: BoxFit.fill,
+                              ),
                             ),
                           ),
                           SizedBox(

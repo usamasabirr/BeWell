@@ -166,6 +166,30 @@ class WeeklySleepMonitorState extends State<WeeklySleepMonitor> {
                     name: 'Sleep',
                     color: Color.fromRGBO(8, 142, 255, 1))
               ]),
+
+          SizedBox(
+            height: 20,
+          ),
+          Container(
+            height: mediaHeight * 0.2,
+            width: mediaWidth * 0.8,
+            decoration: BoxDecoration(
+                color: Colors.grey, borderRadius: BorderRadius.circular(10)),
+            child:
+                Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+              Text(
+                'Average Sleep Time',
+                style: TextStyle(color: Colors.black, fontSize: 20),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Text(
+                '${sleepController.averageSleepTime.toStringAsFixed(2)} h',
+                style: TextStyle(color: Colors.black, fontSize: 20),
+              ),
+            ]),
+          ),
         ],
       ),
     ));

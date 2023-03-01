@@ -1,6 +1,7 @@
 import 'package:be_well/reminder/medicineReminder/view/medicine_reminder.dart';
 import 'package:be_well/reminder/view/sleepReminder.dart';
 import 'package:be_well/sleep/controller/sleepController.dart';
+import 'package:be_well/upload/document/view/document.dart';
 import 'package:be_well/upload/prescription/view/prescription.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
@@ -39,7 +40,7 @@ class _UploadHomeState extends State<UploadHome> {
                 child: SizedBox(),
               ),
               Text(
-                'Reminder',
+                'Upload',
                 style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
               ),
               Expanded(
@@ -50,14 +51,8 @@ class _UploadHomeState extends State<UploadHome> {
           ),
           //Text
           SizedBox(
-            height: 10,
+            height: mediaHeight * 0.15,
           ),
-          Text(
-            'Which Reminder',
-            style: TextStyle(fontSize: 22, fontWeight: FontWeight.w400),
-          ),
-          Text('would you like to choose',
-              style: TextStyle(fontSize: 22, fontWeight: FontWeight.w400)),
 
           //Prescription
           SizedBox(
@@ -96,7 +91,7 @@ class _UploadHomeState extends State<UploadHome> {
                 style: ElevatedButton.styleFrom(
                     shape: StadiumBorder(), backgroundColor: Color(0xff7FD958)),
                 onPressed: () {
-                  Get.to((MedicineReminder()));
+                  Get.to(((MyDocument())));
                 },
                 child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,

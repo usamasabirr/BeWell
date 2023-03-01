@@ -15,6 +15,7 @@ class SleepController extends GetxController {
   var sleepMonitorBox = Hive.box<SleepMonitorModel>('SleepMonitor');
   late List<ChartData> data = [];
   double result = 0;
+  RxDouble averageSleepTime = 0.0.obs;
   //sleep Time
   Rx<int> sleepHour = 0.obs;
   Rx<int> sleepMin = 0.obs;
@@ -109,10 +110,14 @@ class SleepController extends GetxController {
   }
 
   getSleepData() {
+    double sum = 0;
     SleepMonitorModel temp1 = sleepMonitorBox.get(0) as SleepMonitorModel;
     temp1.weekDay.forEach((key, value) {
       ChartData chart = ChartData(key, value);
+      print('value is $value');
       data.add(chart);
+      sum += value;
     });
+    averageSleepTime.value = sum / 24;
   }
 }

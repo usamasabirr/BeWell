@@ -23,6 +23,7 @@ import 'package:be_well/reminder/view/sleepReminder.dart';
 import 'package:be_well/sleep/model/sleepMonitor_model.dart';
 import 'package:be_well/sleep/view/sleep.dart';
 import 'package:be_well/sleep/view/weekly_sleep_monitor.dart';
+import 'package:be_well/upload/document/model/document_model.dart';
 import 'package:be_well/upload/prescription/model/prescription_model.dart';
 import 'package:be_well/upload/prescription/view/prescription.dart';
 import 'package:be_well/upload/upload_home.dart';
@@ -46,12 +47,14 @@ Future<void> main() async {
   Hive.registerAdapter(MedicineReminderModelAdapter());
   Hive.registerAdapter(PeriodModelAdapter());
   Hive.registerAdapter(PrescriptionModelAdapter());
+  Hive.registerAdapter(DocumentModelAdapter());
 
   await Hive.openBox<SleepMonitorModel>('SleepMonitor');
   await Hive.openBox<SleepReminderModel>('SleepReminder');
   await Hive.openBox<MedicineReminderModel>('MedicineReminder');
   await Hive.openBox<PeriodModel>('Period');
   await Hive.openBox<PrescriptionModel>('Prescription');
+  await Hive.openBox<DocumentModel>('Document');
 
   runApp(MyApp());
 }
