@@ -64,9 +64,7 @@ class _MedicineReminderState extends State<MedicineReminder> {
           ),
 
           //Name
-          SizedBox(
-            height: 10,
-          ),
+
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -82,7 +80,7 @@ class _MedicineReminderState extends State<MedicineReminder> {
             ],
           ),
           SizedBox(
-            height: 10,
+            height: 2,
           ),
           Container(
             margin: EdgeInsets.symmetric(horizontal: mediaWidth * 0.12),
@@ -106,7 +104,7 @@ class _MedicineReminderState extends State<MedicineReminder> {
 
           //intake Time
           SizedBox(
-            height: 15,
+            height: 4,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,

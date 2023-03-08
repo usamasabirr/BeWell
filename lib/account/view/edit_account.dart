@@ -298,6 +298,7 @@ class _EditAccountState extends State<EditAccount> {
                                 TextFormField(
                                   controller:
                                       accountController.weightController,
+                                  keyboardType: TextInputType.number,
                                   decoration: InputDecoration(
                                       border: OutlineInputBorder(
                                           borderRadius:

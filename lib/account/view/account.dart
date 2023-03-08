@@ -364,7 +364,16 @@ class _AccountState extends State<Account> {
                             shape: StadiumBorder(),
                             backgroundColor: Color(0xff7FD958)),
                         onPressed: () {
-                          accountController.deleteAccount();
+                          Get.defaultDialog(
+                              title: 'Confirmation',
+                              content: Text('Are you sure?'),
+                              onConfirm: () {
+                                accountController.deleteAccount();
+                              },
+                              onCancel: () {
+                                Get.back();
+                              });
+
                           //qrCodeController.generateQrCode();
                         },
                         child: Text("Delete Acount")),
