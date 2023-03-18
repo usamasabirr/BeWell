@@ -31,11 +31,6 @@ class _QrInfoImageState extends State<QrInfoImage> {
               child: Container(
             height: mediaHeight,
             width: mediaWidth,
-            decoration: BoxDecoration(
-                color: Colors.green,
-                image: DecorationImage(
-                    fit: BoxFit.fill,
-                    image: AssetImage('assets/images/background.png'))),
             child: Column(
               children: [
                 //Appbar
@@ -59,7 +54,7 @@ class _QrInfoImageState extends State<QrInfoImage> {
                     Text(
                       "QR Code",
                       style: TextStyle(
-                          color: Colors.white,
+                          color: Colors.black,
                           fontSize: 32,
                           fontWeight: FontWeight.bold),
                     ),
@@ -84,249 +79,373 @@ class _QrInfoImageState extends State<QrInfoImage> {
                         width: mediaWidth,
                       ),
                       Positioned(
-                        left: 20,
-                        right: 20,
-                        top: mediaHeight * 0.06,
-                        child: Container(
-                            height: mediaHeight * 0.7,
-                            width: mediaWidth,
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(10)),
-                            child: Container(
-                              //color: Colors.orange,
-                              margin: EdgeInsets.only(
-                                  top: mediaHeight * 0.12 - mediaHeight * 0.06,
-                                  left: 20),
-                              child: SingleChildScrollView(
-                                child: Column(
+                          left: 20,
+                          right: 20,
+                          top: mediaHeight * 0.02,
+                          child: Column(children: [
+                            Container(
+                              height: mediaHeight * 0.34,
+                              width: mediaWidth * 0.8,
+                              padding: EdgeInsets.all(10),
+                              decoration: BoxDecoration(
+                                  color: Color(0xff02166F),
+                                  borderRadius: BorderRadius.circular(10)),
+                              child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      'Name',
-                                      style: TextStyle(color: Colors.black),
-                                    ),
-                                    SizedBox(
-                                      height: 3,
-                                    ),
-                                    Text(
-                                      myHomePageController.userInfo.value.name,
+                                      'Health Information',
                                       style: TextStyle(
-                                          color: Color(0xff161455),
-                                          fontWeight: FontWeight.w500),
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    Divider(
+                                      thickness: 2,
+                                      color: Colors.green,
+                                    ),
+                                    Row(
+                                      children: [
+                                        Text(
+                                          'Name',
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                        SizedBox(
+                                          width: 20,
+                                        ),
+                                        Text(
+                                          myHomePageController
+                                              .userInfo.value.name,
+                                          style: TextStyle(
+                                              color: Colors.grey,
+                                              fontWeight: FontWeight.bold),
+                                        )
+                                      ],
                                     ),
                                     SizedBox(
-                                      height: 6,
+                                      height: 10,
                                     ),
+                                    Container(
+                                      height: mediaHeight * 0.23,
+                                      width: mediaWidth * 0.8,
+                                      padding: EdgeInsets.all(10),
+                                      decoration: BoxDecoration(
+                                          border:
+                                              Border.all(color: Colors.green),
+                                          borderRadius:
+                                              BorderRadius.circular(10)),
+                                      child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceEvenly,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Row(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  'Blood Type',
+                                                  style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                                SizedBox(
+                                                  width: 20,
+                                                ),
+                                                Text(
+                                                  myHomePageController
+                                                      .userInfo.value.bloodType,
+                                                  style: TextStyle(
+                                                      color: Colors.grey,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                                Expanded(
+                                                  child: SizedBox(),
+                                                ),
+                                                Text(
+                                                  'Gender',
+                                                  style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                                SizedBox(
+                                                  width: 20,
+                                                ),
+                                                Text(
+                                                  myHomePageController
+                                                      .userInfo.value.gender,
+                                                  style: TextStyle(
+                                                      color: Colors.grey,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                )
+                                              ],
+                                            ),
+                                            Row(
+                                              children: [
+                                                Text(
+                                                  'Birth Date',
+                                                  style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                                SizedBox(
+                                                  width: 20,
+                                                ),
+                                                Text(
+                                                  myHomePageController.userInfo
+                                                      .value.dateOfBirth,
+                                                  style: TextStyle(
+                                                      color: Colors.grey,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                )
+                                              ],
+                                            ),
+                                            Row(
+                                              children: [
+                                                Text(
+                                                  'Diseases',
+                                                  style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                                SizedBox(
+                                                  width: 20,
+                                                ),
+                                                Text(
+                                                  myHomePageController
+                                                      .userInfo.value.diseases,
+                                                  style: TextStyle(
+                                                      color: Colors.grey,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                )
+                                              ],
+                                            ),
+                                            Row(
+                                              children: [
+                                                Text(
+                                                  'Allergies',
+                                                  style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                                SizedBox(
+                                                  width: 20,
+                                                ),
+                                                Text(
+                                                  myHomePageController
+                                                      .userInfo.value.allergies,
+                                                  style: TextStyle(
+                                                      color: Colors.grey,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                )
+                                              ],
+                                            ),
+                                            Row(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  'Weight',
+                                                  style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                                SizedBox(
+                                                  width: 20,
+                                                ),
+                                                Text(
+                                                  myHomePageController
+                                                      .userInfo.value.weight,
+                                                  style: TextStyle(
+                                                      color: Colors.grey,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                                Expanded(
+                                                  child: SizedBox(),
+                                                ),
+                                                Text(
+                                                  'Height',
+                                                  style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                                SizedBox(
+                                                  width: 20,
+                                                ),
+                                                Text(
+                                                  myHomePageController
+                                                      .userInfo.value.height,
+                                                  style: TextStyle(
+                                                      color: Colors.grey,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                )
+                                              ],
+                                            ),
+                                          ]),
+                                    )
+                                  ]),
+                            ),
+                            SizedBox(
+                              height: 20,
+                            ),
+                            Container(
+                              width: mediaWidth * 0.8,
+                              height: mediaHeight * 0.2,
+                              padding: EdgeInsets.all(10),
+                              decoration: BoxDecoration(
+                                  color: Color(0xff02166F),
+                                  borderRadius: BorderRadius.circular(10)),
+                              child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
                                     Text(
-                                      'Date Of Birth',
-                                      style: TextStyle(color: Colors.black),
-                                    ),
-                                    SizedBox(
-                                      height: 3,
-                                    ),
-                                    Text(
-                                      myHomePageController
-                                          .userInfo.value.dateOfBirth,
+                                      'Contact Information (Friend / Family)',
                                       style: TextStyle(
-                                          color: Color(0xff161455),
-                                          fontWeight: FontWeight.w500),
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    Divider(
+                                      thickness: 2,
+                                      color: Colors.green,
                                     ),
                                     SizedBox(
-                                      height: 6,
+                                      height: 10,
                                     ),
-                                    Text(
-                                      'Blood Type',
-                                      style: TextStyle(color: Colors.black),
+                                    Row(
+                                      children: [
+                                        Text(
+                                          'Name',
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                        SizedBox(
+                                          width: 20,
+                                        ),
+                                        Text(
+                                          myHomePageController
+                                              .userInfo.value.friendName,
+                                          style: TextStyle(
+                                              color: Colors.grey,
+                                              fontWeight: FontWeight.bold),
+                                        )
+                                      ],
                                     ),
                                     SizedBox(
-                                      height: 3,
+                                      height: 10,
                                     ),
+                                    Row(
+                                      children: [
+                                        Text(
+                                          'Phone no',
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                        SizedBox(
+                                          width: 20,
+                                        ),
+                                        Text(
+                                          myHomePageController
+                                              .userInfo.value.friendNumber,
+                                          style: TextStyle(
+                                              color: Colors.grey,
+                                              fontWeight: FontWeight.bold),
+                                        )
+                                      ],
+                                    ),
+                                  ]),
+                            ),
+                            SizedBox(
+                              height: 20,
+                            ),
+                            Container(
+                              width: mediaWidth * 0.8,
+                              height: mediaHeight * 0.15,
+                              padding: EdgeInsets.all(10),
+                              decoration: BoxDecoration(
+                                  color: Color(0xff02166F),
+                                  borderRadius: BorderRadius.circular(10)),
+                              child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
                                     Text(
-                                      myHomePageController
-                                          .userInfo.value.bloodType,
+                                      'Contact Information (Doctor)',
                                       style: TextStyle(
-                                          color: Color(0xff161455),
-                                          fontWeight: FontWeight.w500),
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    Divider(
+                                      thickness: 2,
+                                      color: Colors.green,
                                     ),
                                     SizedBox(
-                                      height: 6,
+                                      height: 10,
                                     ),
-                                    Text(
-                                      'Allergies',
-                                      style: TextStyle(color: Colors.black),
-                                    ),
-                                    SizedBox(
-                                      height: 3,
-                                    ),
-                                    Text(
-                                      myHomePageController
-                                          .userInfo.value.allergies,
-                                      style: TextStyle(
-                                          color: Color(0xff161455),
-                                          fontWeight: FontWeight.w500),
-                                    ),
-                                    SizedBox(
-                                      height: 6,
-                                    ),
-                                    Text(
-                                      'Diseases',
-                                      style: TextStyle(color: Colors.black),
-                                    ),
-                                    SizedBox(
-                                      height: 3,
-                                    ),
-                                    Text(
-                                      myHomePageController
-                                          .userInfo.value.diseases,
-                                      style: TextStyle(
-                                          color: Color(0xff161455),
-                                          fontWeight: FontWeight.w500),
+                                    Row(
+                                      children: [
+                                        Text(
+                                          'Name',
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                        SizedBox(
+                                          width: 20,
+                                        ),
+                                        Text(
+                                          myHomePageController
+                                              .userInfo.value.doctorName,
+                                          style: TextStyle(
+                                              color: Colors.grey,
+                                              fontWeight: FontWeight.bold),
+                                        )
+                                      ],
                                     ),
                                     SizedBox(
-                                      height: 6,
+                                      height: 10,
                                     ),
-                                    Text(
-                                      'Weight (Kg)',
-                                      style: TextStyle(color: Colors.black),
+                                    Row(
+                                      children: [
+                                        Text(
+                                          'Phone no',
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                        SizedBox(
+                                          width: 20,
+                                        ),
+                                        Text(
+                                          myHomePageController
+                                              .userInfo.value.doctorNumber,
+                                          style: TextStyle(
+                                              color: Colors.grey,
+                                              fontWeight: FontWeight.bold),
+                                        )
+                                      ],
                                     ),
-                                    SizedBox(
-                                      height: 3,
-                                    ),
-                                    Text(
-                                      myHomePageController
-                                          .userInfo.value.weight,
-                                      style: TextStyle(
-                                          color: Color(0xff161455),
-                                          fontWeight: FontWeight.w500),
-                                    ),
-                                    SizedBox(
-                                      height: 6,
-                                    ),
-                                    Text(
-                                      'Height (cm)',
-                                      style: TextStyle(color: Colors.black),
-                                    ),
-                                    SizedBox(
-                                      height: 3,
-                                    ),
-                                    Text(
-                                      myHomePageController
-                                          .userInfo.value.height,
-                                      style: TextStyle(
-                                          color: Color(0xff161455),
-                                          fontWeight: FontWeight.w500),
-                                    ),
-                                    SizedBox(
-                                      height: 6,
-                                    ),
-                                    Text(
-                                      'Gender',
-                                      style: TextStyle(color: Colors.black),
-                                    ),
-                                    SizedBox(
-                                      height: 3,
-                                    ),
-                                    Text(
-                                      myHomePageController
-                                          .userInfo.value.gender,
-                                      style: TextStyle(
-                                          color: Color(0xff161455),
-                                          fontWeight: FontWeight.w500),
-                                    ),
-                                    SizedBox(
-                                      height: 6,
-                                    ),
-                                    Text(
-                                      'Friend Name',
-                                      style: TextStyle(color: Colors.black),
-                                    ),
-                                    SizedBox(
-                                      height: 3,
-                                    ),
-                                    Text(
-                                      myHomePageController
-                                          .userInfo.value.friendName,
-                                      style: TextStyle(
-                                          color: Color(0xff161455),
-                                          fontWeight: FontWeight.w500),
-                                    ),
-                                    SizedBox(
-                                      height: 6,
-                                    ),
-                                    Text(
-                                      'Friend or Family Number',
-                                      style: TextStyle(color: Colors.black),
-                                    ),
-                                    SizedBox(
-                                      height: 3,
-                                    ),
-                                    Text(
-                                      myHomePageController
-                                          .userInfo.value.friendNumber,
-                                      style: TextStyle(
-                                          color: Color(0xff161455),
-                                          fontWeight: FontWeight.w500),
-                                    ),
-                                    SizedBox(
-                                      height: 6,
-                                    ),
-                                    SizedBox(
-                                      height: 6,
-                                    ),
-                                    Text(
-                                      'Doctor Name',
-                                      style: TextStyle(color: Colors.black),
-                                    ),
-                                    SizedBox(
-                                      height: 3,
-                                    ),
-                                    Text(
-                                      myHomePageController
-                                          .userInfo.value.doctorName,
-                                      style: TextStyle(
-                                          color: Color(0xff161455),
-                                          fontWeight: FontWeight.w500),
-                                    ),
-                                    SizedBox(
-                                      height: 6,
-                                    ),
-                                    Text(
-                                      'Doctor Number',
-                                      style: TextStyle(color: Colors.black),
-                                    ),
-                                    SizedBox(
-                                      height: 3,
-                                    ),
-                                    Text(
-                                      myHomePageController
-                                          .userInfo.value.doctorNumber,
-                                      style: TextStyle(
-                                          color: Color(0xff161455),
-                                          fontWeight: FontWeight.w500),
-                                    ),
-                                    SizedBox(
-                                      height: 6,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            )),
-                      ),
-                      Positioned(
-                        left: (mediaWidth / 2) - ((mediaHeight * 0.12) / 2),
-                        child: Container(
-                          height: mediaHeight * 0.12,
-                          width: mediaHeight * 0.12,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(50),
-                              color: Colors.green,
-                              image: DecorationImage(
-                                  fit: BoxFit.fill,
-                                  image: AssetImage(
-                                      'assets/images/female_vector.png'))),
-                        ),
-                      ),
+                                  ]),
+                            ),
+                          ])),
                     ],
                   ),
                 ),
