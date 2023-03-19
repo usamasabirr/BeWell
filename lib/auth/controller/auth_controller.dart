@@ -97,6 +97,7 @@ class AuthController extends GetxController {
           return true;
         } catch (error) {
           loading.value = false;
+          print(error);
           return false;
         }
       }

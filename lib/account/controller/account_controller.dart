@@ -68,10 +68,10 @@ class AccountController extends GetxController {
     try {
       await _firestore.collection('Users').doc(previousData.docId).update({
         'name': nameController.text,
-        'email': emailController.text,
+        //'email': emailController.text,
         'userName': usernameController.text,
-        'password': passwordController.text,
-        'confirmPassword': confirmPasswordController.text,
+        //'password': passwordController.text,
+        //'confirmPassword': confirmPasswordController.text,
         'dateOfBirth': dateController.text,
         'bloodType': bloodType,
         'allergies': allergiesController.text,
